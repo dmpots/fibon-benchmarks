@@ -112,3 +112,4 @@ TAGS/
 *.beam
 
 #fibon-benchmarks
+dist/
