@@ -21,10 +21,11 @@ data-files:          README, INSTALL, paper/HaLeX.ps, example/README, example/re
 extra-source-files:  scripts/Make_Animation, scripts/faAnim.lefty, example/real, example/real_dfa.hs,
                      example/real_ndfa.hs, example/GenMDfa.hs
 Library
-        build-depends:          base, mtl
+        buildable:              False
+        build-depends:          base >3 && <= 5, mtl
         extensions:             FlexibleContexts, FlexibleInstances, MultiParamTypeClasses
 
-        ghc-options:         -O2 -Wall
+        ghc-options:         
         ghc-prof-options:    -prof -auto-all
 
         hs-source-dirs:         HaLeX_lib
@@ -38,6 +39,7 @@ Executable halex
            executable:          halex
            main-is:             halex.hs
            hs-source-dirs:      HaLeX_tool, HaLeX_lib
+           build-depends:       base >3 && <= 5
 
-           ghc-options:         -O2 -Wall 
+           ghc-options:         
            ghc-prof-options:    -prof -auto-all
