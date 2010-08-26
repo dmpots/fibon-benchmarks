@@ -13,7 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "mines.stdout.expected"),
-                        (OutputFile "mines.svg", Diff "gen1.svg.expected")]
+                        (OutputFile "mines.svg", Diff "mines.svg.expected")]
     , localPath      = "Hackage/Mines"
     , exeName        = "mines"
   }
