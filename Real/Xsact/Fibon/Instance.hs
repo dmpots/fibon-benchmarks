@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
-module Fibon.Benchmarks.Hackage.Xsact.Fibon.Instance(
+module Fibon.Benchmarks.Real.Xsact.Fibon.Instance(
   mkInstance
 )
 where

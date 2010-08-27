@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
-module Fibon.Benchmarks.Hackage.TernaryTrees.Fibon.Instance (
+module Fibon.Benchmarks.Real.Agum.Fibon.Instance(
   mkInstance
 )
 where
@@ -11,19 +11,17 @@ sharedConfig = BenchmarkInstance {
       , buildFlags     = []
       , runFlags       = []
       }
-    , stdinInput     = Just "words"
-    , output         = [(Stdout, Diff "tdict.stdout.expected")]
-    , localPath      = "Hackage/TernaryTrees"
-    , exeName        = "tdict"
+    , stdinInput     = Just "eqn.txt"
+    , output         = [(Stdout, Diff "agum.stdout.expected")]
+    , localPath      = "Hackage/Agum"
+    , exeName        = "agum"
   }
 flgCfg = flagConfig sharedConfig
 
 mkInstance Test = sharedConfig {
-        flagConfig = flgCfg {runFlags = ["theend.txt"]}
+        flagConfig = flgCfg
     }
 mkInstance Ref  = sharedConfig {
-        flagConfig = flgCfg {runFlags = ["olivertwist.txt"]}
+        flagConfig = flgCfg
     }
-
-
 

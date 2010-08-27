@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
-module Fibon.Benchmarks.Hackage.Agum.Fibon.Instance(
+module Fibon.Benchmarks.Real.Cpsa.Fibon.Instance(
   mkInstance
 )
 where
@@ -11,17 +11,17 @@ sharedConfig = BenchmarkInstance {
       , buildFlags     = []
       , runFlags       = []
       }
-    , stdinInput     = Just "eqn.txt"
-    , output         = [(Stdout, Diff "agum.stdout.expected")]
-    , localPath      = "Hackage/Agum"
-    , exeName        = "agum"
+    , stdinInput     = Nothing
+    , output         = [(Stdout, Diff "cpsa.stdout.expected")]
+    , localPath      = "Hackage/Cpsa"
+    , exeName        = "cpsa"
   }
 flgCfg = flagConfig sharedConfig
 
 mkInstance Test = sharedConfig {
-        flagConfig = flgCfg
+        flagConfig = flgCfg {runFlags = ["ns.scm"]}
     }
 mkInstance Ref  = sharedConfig {
-        flagConfig = flgCfg
+        flagConfig = flgCfg {runFlags = ["nsl5.lisp"]}
     }
 

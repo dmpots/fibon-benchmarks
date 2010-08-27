@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
-module Fibon.Benchmarks.Hackage.Cpsa.Fibon.Instance(
+module Fibon.Benchmarks.Real.TernaryTrees.Fibon.Instance (
   mkInstance
 )
 where
@@ -11,17 +11,19 @@ sharedConfig = BenchmarkInstance {
       , buildFlags     = []
       , runFlags       = []
       }
-    , stdinInput     = Nothing
-    , output         = [(Stdout, Diff "cpsa.stdout.expected")]
-    , localPath      = "Hackage/Cpsa"
-    , exeName        = "cpsa"
+    , stdinInput     = Just "words"
+    , output         = [(Stdout, Diff "tdict.stdout.expected")]
+    , localPath      = "Hackage/TernaryTrees"
+    , exeName        = "tdict"
   }
 flgCfg = flagConfig sharedConfig
 
 mkInstance Test = sharedConfig {
-        flagConfig = flgCfg {runFlags = ["ns.scm"]}
+        flagConfig = flgCfg {runFlags = ["theend.txt"]}
     }
 mkInstance Ref  = sharedConfig {
-        flagConfig = flgCfg {runFlags = ["nsl5.lisp"]}
+        flagConfig = flgCfg {runFlags = ["olivertwist.txt"]}
     }
+
+
 
