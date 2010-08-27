@@ -13,7 +13,6 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Just "PLONK"
     , output         = [(Stdout, Diff "fst.stdout.expected")]
-    , localPath      = "Hackage/Fst"
     , exeName        = "fst"
   }
 flgCfg = flagConfig sharedConfig

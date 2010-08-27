@@ -13,7 +13,6 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "cpsa.stdout.expected")]
-    , localPath      = "Hackage/Cpsa"
     , exeName        = "cpsa"
   }
 flgCfg = flagConfig sharedConfig

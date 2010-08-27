@@ -13,7 +13,6 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "xsact.stdout.expected")]
-    , localPath      = "Hackage/Xsact"
     , exeName        = "xsact"
   }
 flgCfg = flagConfig sharedConfig

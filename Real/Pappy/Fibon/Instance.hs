@@ -13,7 +13,6 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "java-parser.stdout.expected")]
-    , localPath      = "Hackage/Pappy"
     , exeName        = "java-parser"
   }
 flgCfg = flagConfig sharedConfig

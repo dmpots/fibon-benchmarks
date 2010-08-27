@@ -13,7 +13,6 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Just "words"
     , output         = [(Stdout, Diff "tdict.stdout.expected")]
-    , localPath      = "Hackage/TernaryTrees"
     , exeName        = "tdict"
   }
 flgCfg = flagConfig sharedConfig

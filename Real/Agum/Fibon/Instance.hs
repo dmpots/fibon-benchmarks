@@ -13,7 +13,6 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Just "eqn.txt"
     , output         = [(Stdout, Diff "agum.stdout.expected")]
-    , localPath      = "Hackage/Agum"
     , exeName        = "agum"
   }
 flgCfg = flagConfig sharedConfig

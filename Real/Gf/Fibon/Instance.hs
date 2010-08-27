@@ -13,7 +13,6 @@ sharedConfig = BenchmarkInstance {
       }
     , output         = []
     , stdinInput     = Nothing
-    , localPath      = "Hackage/Gf"
     , exeName        = "gf"
   }
 flgCfg = flagConfig sharedConfig
