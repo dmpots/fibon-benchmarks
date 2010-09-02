@@ -1,4 +1,4 @@
-{-# Language ScopedTypeVariables #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 module ExSimple where
 
 --------------------------------------------------------------------------
