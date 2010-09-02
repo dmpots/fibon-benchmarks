@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 # Simple script to count and display lines of code in a benchmark
 def wcTotal(dir)
   cmd = %@find "#{dir}" \\( \\( -name "*.hs" \\) -or \\( -name "*.lhs" \\) \\) \\! -name "Instance.hs" | xargs wc -l @
