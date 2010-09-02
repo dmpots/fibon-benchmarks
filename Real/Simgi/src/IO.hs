@@ -70,7 +70,7 @@ write_to_handle None _ = return ()
 write_to_handle (RealHandle handle) ((Output {outputData = out}):xs) = 
 
   let 
-    counts = foldr (\x a -> (printf "%18.15f  " x) ++ a) "" out
+    counts = foldr (\x a -> (printf "%18.2f  " x) ++ a) "" out
   in
     hPutStrLn handle counts
     >> write_to_handle (RealHandle handle) xs
