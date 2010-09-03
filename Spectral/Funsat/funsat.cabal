@@ -59,7 +59,7 @@ Executable funsat
                       Funsat.Utils.Internal
                       Text.Tabular
 
- Build-Depends:       base >= 3 && < 5,
+ Build-Depends:       base >= 4 && < 5,
                       random,
                       containers,
                       pretty,
