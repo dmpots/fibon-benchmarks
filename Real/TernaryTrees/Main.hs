@@ -41,6 +41,10 @@ main = do
     
 interact' :: (String -> String) -> IO ()
 interact' f = do
-    line <- getLine
-    putStrLn (f line)
-    interact' f
+    eof <- isEOF
+    if eof
+      then return ()
+      else do
+        line <- getLine
+        putStrLn (f line)
+        interact' f
