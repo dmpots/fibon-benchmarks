@@ -282,12 +282,12 @@ extendCentres a n centres tcentres centreDistance
                     (tail tcentres) (centreDistance-1)
 
 finalCentres :: Int -> [Int] -> [Int] -> [Int]
+finalCentres n     _        _       | n < 0 =  error "finalCentres: input < 0"
 finalCentres 0     _        centres  =  centres
-finalCentres (n+1) tcentres centres  =  
-  finalCentres n 
+finalCentres n tcentres centres  =
+  finalCentres (n-1)
                (tail tcentres) 
-               (min (head tcentres) n:centres)
-finalCentres _     _        _        =  error "finalCentres: input < 0"               
+               (min (head tcentres) (n-1):centres)
 
 -----------------------------------------------------------------------------
 -- Showing palindromes
