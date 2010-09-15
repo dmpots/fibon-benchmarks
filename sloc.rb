@@ -10,11 +10,10 @@ def wcTotal(dir)
   elsif s.split("\n").length == 1 then
     tot = s
   else
-    tot = s.each.reject {|l| not (l =~ /\s*\d+\s+total/)}.first
+    tot = s.split("\n").reject{|l| not (l =~ /\s*\d+\s+total/)}.first
   end
-  tot.match(/\s+(\d+)\s+/)
+  tot.match(/\s*(\d+)\s+/)
   $1
-  #tot.gsub(/\s+/, " ").gsub("total", "")
 end
 
 def ppWc(n, h=nil)
