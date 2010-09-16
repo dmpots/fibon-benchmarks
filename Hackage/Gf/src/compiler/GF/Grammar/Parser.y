@@ -682,8 +682,11 @@ checkInfoType mt (id,info) =
     ResOper  pty pt   -> ifResource mt (locPerh pty ++ locPerh pt)
     ResOverload _ xs  -> ifResource mt (concat [[loc1,loc2] | (L loc1 _,L loc2 _) <- xs])
   where
+    locPerh :: Maybe (L a) -> [(Int, Int)]
     locPerh = maybe [] locL
+    locAll  :: [(L a)] -> [(Int, Int)]
     locAll xs = [loc | L loc x <- xs]
+    locL    :: (L a) -> [(Int, Int)]
     locL (L loc x) = [loc]
     
     illegal ((s,e):_) = failLoc (Pn s 0) "illegal definition"

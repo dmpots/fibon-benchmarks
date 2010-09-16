@@ -38,7 +38,7 @@ import Control.Monad.State.Class
 
 -- BacktrackM = state monad transformer over the backtracking monad
 
-newtype BacktrackM s a = BM (forall b . (a -> s -> b -> b) -> s -> b -> b)
+newtype BacktrackM s a = BM {unBM :: (forall b . (a -> s -> b -> b) -> s -> b -> b)}
 
 -- * running the monad
 
@@ -63,7 +63,6 @@ finalStates bm = map fst . runBM bm
 instance Monad (BacktrackM s) where
     return a   = BM (\c s b -> c a s b)
     BM m >>= k = BM (\c s b -> m (\a s b -> unBM (k a) c s b) s b)
-	where unBM (BM m) = m
     fail _ = mzero
 
 instance Functor (BacktrackM s) where
