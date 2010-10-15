@@ -7,7 +7,7 @@ import Fibon.BenchmarkInstance
 
 sharedConfig = BenchmarkInstance {
     flagConfig = FlagConfig {
-        configureFlags = []
+        configureFlags = ["--ghc-option=-threaded"]
       , buildFlags     = []
       , runFlags       = []
       }

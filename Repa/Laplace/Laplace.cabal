@@ -43,5 +43,4 @@ Executable repa-laplace
                   ../_RepaLib/quickcheck 
                   src/Laplace/src
 
-  ghc-options:-threaded
 

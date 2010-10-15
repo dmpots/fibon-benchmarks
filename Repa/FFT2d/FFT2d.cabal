@@ -42,5 +42,4 @@ Executable repa-fft2d
                   ../_RepaLib/repa-bytestring 
                   ../_RepaLib/quickcheck 
 
-  ghc-options:-threaded
 
