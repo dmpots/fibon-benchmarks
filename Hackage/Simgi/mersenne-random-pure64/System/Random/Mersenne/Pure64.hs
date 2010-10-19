@@ -68,10 +68,14 @@ newPureMT = do
 -- Being purely functional, the PureMT generator is an instance of
 -- RandomGen. However, it doesn't support 'split' yet.
 
+#if __GLASGOW_HASKELL__ < 700
 instance RandomGen PureMT where
    next  = randomInt
    split = error "System.Random.Mersenne.Pure: unable to split the mersenne twister"
-
+#else
+instance RandomGen PureMT where
+   next  = randomInt
+#endif
 ------------------------------------------------------------------------
 -- Direct access to Int, Word and Double types
 

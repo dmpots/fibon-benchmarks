@@ -8,6 +8,7 @@ import System.Random
   , Random(..)
   , StdGen
   , newStdGen
+  , split
   )
 
 import Control.Monad

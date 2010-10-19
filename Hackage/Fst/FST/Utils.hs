@@ -21,7 +21,6 @@ module FST.Utils (
    **********************************************************
 -}
 
-{-# SPECIALIZE cross :: [Int] -> [Int] -> [(Int,Int)] #-}
 
 cross :: [a] -> [b] -> [(a,b)]
 cross as bs = [(a,b) | a <- as, b <- bs]

@@ -15,6 +15,7 @@ import System.Random
   ( RandomGen(..)
   , newStdGen
   , StdGen
+  , split
   )
 
 import Data.Char
