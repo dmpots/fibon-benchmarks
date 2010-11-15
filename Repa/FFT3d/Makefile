@@ -35,4 +35,5 @@ SRCS = ../_RepaLib/bmp/Codec/BMP/CIEXYZ.hs \
        src/FFT/HighPass3d/src/Main.hs
 PROG_ARGS += 128 output
 HC_OPTS += -threaded -i. -i../_RepaLib/repa -i../_RepaLib/repa-algorithms -i../_RepaLib/repa-io -i../_RepaLib/bmp -i../_RepaLib/repa-bytestring -i../_RepaLib/quickcheck -package base -package binary -package bytestring -package dph-base -package dph-prim-par -package dph-prim-seq -package extensible-exceptions -package ghc -package mtl -package old-time -package random
+CLEAN_FILES += output000.bmp
 include $(TOP)/mk/target.mk

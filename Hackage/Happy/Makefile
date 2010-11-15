@@ -7,17 +7,17 @@ SRCS = src/NameSet.hs \
        src/GenUtils.lhs \
        src/ParseMonad.lhs \
        src/Lexer.lhs \
-       dist/build/happy/happy-tmp/Parser.hs \
+       generated/Parser.hs \
        src/AttrGrammar.lhs \
-       dist/build/happy/happy-tmp/AttrGrammarParser.hs \
+       generated/AttrGrammarParser.hs \
        src/Grammar.lhs \
        src/First.lhs \
        src/LALR.lhs \
-       dist/build/autogen/Paths_happy.hs \
+       generated/Paths_happy.hs \
        src/ProduceCode.lhs \
        src/ProduceGLRCode.lhs \
        src/Info.lhs \
        src/Main.lhs
-PROG_ARGS += -t . Bio.y ErlParser.ly HaskellParser.y TestInput.y
-HC_OPTS += -isrc -package array -package base -package containers -package mtl
+PROG_ARGS += -O-t . Bio.y ErlParser.ly HaskellParser.y TestInput.y
+HC_OPTS += -isrc -igenerated -package array -package base -package containers -package mtl -XCPP -XMagicHash
 include $(TOP)/mk/target.mk

@@ -45,7 +45,7 @@ SRCS = src/compiler/GF/Data/BacktrackM.hs \
        src/runtime/haskell/PGF.hs \
        src/compiler/GF/Compile/ExampleBased.hs \
        src/compiler/GF/Command/TreeOperations.hs \
-       dist/build/autogen/Paths_gf.hs \
+       generated/Paths_gf.hs \
        src/compiler/GF/Data/ErrM.hs \
        src/compiler/GF/Infra/Option.hs \
        src/compiler/GF/Speech/CFG.hs \
@@ -78,9 +78,9 @@ SRCS = src/compiler/GF/Data/BacktrackM.hs \
        src/compiler/GF/Grammar/MMacros.hs \
        src/compiler/GF/Grammar.hs \
        src/compiler/GF/Compile/Concrete/TypeCheck.hs \
-       dist/build/gf/gf-tmp/GF/Grammar/Lexer.hs \
+       generated/GF/Grammar/Lexer.hs \
        src/compiler/GF/Compile/Update.hs \
-       dist/build/gf/gf-tmp/GF/Grammar/Parser.hs \
+       generated/GF/Grammar/Parser.hs \
        src/runtime/haskell/PGF/Printer.hs \
        src/compiler/GF/Quiz.hs \
        src/compiler/GF/Compile/PGFtoHaskell.hs \
@@ -114,6 +114,6 @@ SRCS = src/compiler/GF/Data/BacktrackM.hs \
        src/compiler/GFI.hs \
        src/compiler/GFC.hs \
        src/compiler/GF.hs
-PROG_ARGS += --src --make -f haskell Eng.gf EngReal.gf FreDescr.gf EngDescr.gf Fre.gf FreReal.gf
-HC_OPTS += -isrc/compiler -isrc/runtime/haskell -package Win32 -package array -package base -package bytestring -package containers -package directory -package filepath -package haskeline -package mtl -package old-time -package pretty -package process -package random -package unix
+PROG_ARGS += --quiet --src --make -f haskell Eng.gf EngReal.gf FreDescr.gf EngDescr.gf Fre.gf FreReal.gf
+HC_OPTS += -isrc/compiler -isrc/runtime/haskell -igenerated -package array -package base -package bytestring -package containers -package directory -package filepath -package haskeline -package mtl -package old-time -package pretty -package process -package random -package unix -optP-DUSE_INTERRUPT
 include $(TOP)/mk/target.mk

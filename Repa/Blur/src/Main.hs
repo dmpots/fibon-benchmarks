@@ -32,7 +32,8 @@ run iterations fileIn fileOut
 		<- time $ let result	= blurComponents iterations arrRed arrGreen arrBlue
 			  in  result `seq` return result
 	
-	putStr $ prettyTime tElapsed
+	-- putStr $ prettyTime tElapsed
+	putStrLn "Done"
 			
 	writeComponentsToBMP fileOut arrRed' arrGreen' arrBlue'
 

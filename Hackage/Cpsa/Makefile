@@ -1,6 +1,6 @@
 TOP = ../../..
 include $(TOP)/mk/boilerplate.mk
-SRCS = dist/build/autogen/Paths_cpsa.hs \
+SRCS = generated/Paths_cpsa.hs \
        src/CPSA/Lib/Pretty.hs \
        src/CPSA/Lib/Utilities.hs \
        src/CPSA/DiffieHellman/IntLinEq.hs \
@@ -18,6 +18,6 @@ SRCS = dist/build/autogen/Paths_cpsa.hs \
        src/CPSA/Basic/Algebra.hs \
        src/CPSA/DiffieHellman/Algebra.hs \
        src/CPSA/Lib/Main.hs
-PROG_ARGS += nsl5.lisp
-HC_OPTS += -fcontext-stack=42 -isrc -package base -package containers -package parallel
+PROG_ARGS += -x1 nsl5.lisp
+HC_OPTS += -fcontext-stack=42 -isrc -igenerated -package base -package containers
 include $(TOP)/mk/target.mk

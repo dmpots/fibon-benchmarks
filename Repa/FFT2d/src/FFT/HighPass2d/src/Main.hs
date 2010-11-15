@@ -47,7 +47,8 @@ mainWithArgs cutoff fileIn fileOut
 			 `deepSeqArray` arrBlue'
 			 `deepSeqArray` return (arrRed', arrGreen', arrBlue')
 	
-	putStr (prettyTime t)
+	-- putStr (prettyTime t)
+	putStrLn "Done"
 	
 	-- Write it back to file.
 	writeComponentsToBMP fileOut

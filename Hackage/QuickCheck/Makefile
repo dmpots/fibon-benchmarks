@@ -15,6 +15,6 @@ SRCS = Test/QuickCheck/Exception.hs \
        examples/ExLambda.hs \
        examples/ExHeap.hs \
        examples/Main.hs
-PROG_ARGS += 1000
+PROG_ARGS += 100000
 HC_OPTS += -iexamples -i. -package base -package containers -package extensible-exceptions -package ghc -package mtl -package random
 include $(TOP)/mk/target.mk

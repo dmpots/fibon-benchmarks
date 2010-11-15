@@ -28,7 +28,7 @@ SRCS = fgl/Data/Graph/Inductive/Internal/FiniteMap.hs \
        parsec/Text/Parsec.hs \
        src/Text/Tabular.hs \
        parse-dimacs/Language/CNF/Parse/ParseDIMACS.hs \
-       dist/build/autogen/Paths_funsat.hs \
+       generated/Paths_funsat.hs \
        src/Funsat/Types.hs \
        src/Funsat/Utils.hs \
        src/Funsat/Types/Internal.hs \
@@ -37,5 +37,6 @@ SRCS = fgl/Data/Graph/Inductive/Internal/FiniteMap.hs \
        src/Funsat/Solver.hs \
        Main.hs
 PROG_ARGS += hole8.cnf par16-5.cnf
-HC_OPTS += -i. -isrc -ibimap -ibitset -ifgl -iparse-dimacs -iparsec -isyb/src -package array -package base -package bytestring -package containers -package mtl -package pretty -package random -package time
+HC_OPTS += -i. -isrc -igenerated -ibimap -ibitset -ifgl -iparse-dimacs -iparsec -isyb/src -package array -package base -package bytestring -package containers -package mtl -package pretty -package random -package time -XCPP -XScopedTypeVariables -XCPP -XBangPatterns -XScopedTypeVariables -XTypeSynonymInstances -XMultiParamTypeClasses -XFunctionalDependencies -XFlexibleInstances -XFlexibleContexts -XDeriveDataTypeable -XRank2Types
+
 include $(TOP)/mk/target.mk

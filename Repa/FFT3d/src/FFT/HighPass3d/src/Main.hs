@@ -43,7 +43,8 @@ mainWithArgs size prefixOut
 	 	$  let arrFinal'	= transform arrInit center cutoff
 	  	   in  arrFinal' `deepSeqArray` return arrFinal'
 
-	putStr (prettyTime t)
+	-- putStr (prettyTime t)
+	putStrLn "Done"
 
  	--mapM_ (dumpSlice prefixOut arrFinal) [0..size - 1]
  	dumpSlice prefixOut arrFinal 0

@@ -78,7 +78,8 @@ laplace steps fileInput fileOutput
 		    in	arrFinal `deepSeqArray` return arrFinal
 
 	-- Print how long it took
-	putStr (prettyTime t)
+	-- putStr (prettyTime t)
+	putStrLn "Done"
 
 	-- Make the result image
 	let arrImageOut		

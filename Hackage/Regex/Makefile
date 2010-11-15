@@ -26,5 +26,6 @@ SRCS = deepseq/Control/DeepSeq.hs \
        Text/Regex/PDeriv/ByteString/TwoPasses.lhs \
        bench/Main.hs
 PROG_ARGS += 10 addr.txt
-HC_OPTS += -i. -ibench -iregex-base -iparsec -ideepseq -ibitset -package array -package base -package bytestring -package containers -package ghc-prim -package mtl
+HC_OPTS += -i. -ibench -iregex-base -iparsec -ideepseq -ibitset -package array -package base -package bytestring -package containers -package ghc-prim -package mtl -XGADTs -XMultiParamTypeClasses -XFunctionalDependencies -XFlexibleInstances -XTypeSynonymInstances -XFlexibleContexts -XScopedTypeVariables -XDeriveDataTypeable
+
 include $(TOP)/mk/target.mk

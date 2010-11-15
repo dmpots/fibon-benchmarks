@@ -1,36 +1,36 @@
 TOP = ../../..
 include $(TOP)/mk/boilerplate.mk
-SRCS = FST/GetOpt.hs \
-       FST/Alex.hs \
-       FST/Lexer.hs \
-       FST/RegTypes.hs \
-       FST/AutomatonTypes.hs \
-       FST/StateMonad.hs \
-       FST/Utils.hs \
-       FST/Automaton.hs \
-       FST/Complete.hs \
-       FST/Deterministic.hs \
-       FST/Reversal.hs \
-       FST/MinimalBrzozowski.hs \
-       FST/LBFA.hs \
-       FST/AutomatonInterface.hs \
-       FST/TransducerTypes.hs \
-       FST/Transducer.hs \
-       FST/RunTransducer.hs \
-       FST/DeterministicT.hs \
-       FST/ReversalT.hs \
-       FST/MinimalTBrzozowski.hs \
-       FST/EpsilonFreeT.hs \
-       FST/Arguments.hs \
-       FST/RRegTypes.hs \
-       FST/LBFT.hs \
-       FST/NReg.hs \
-       FST/Parse.hs \
-       FST/FileImport.hs \
-       FST/TransducerInterface.hs \
-       FST/Info.hs \
-       FST/Main.hs
+SRCS = src/FST/GetOpt.hs \
+       src/FST/Alex.hs \
+       src/FST/Lexer.hs \
+       src/FST/RegTypes.hs \
+       src/FST/AutomatonTypes.hs \
+       src/FST/StateMonad.hs \
+       src/FST/Utils.hs \
+       src/FST/Automaton.hs \
+       src/FST/Complete.hs \
+       src/FST/Deterministic.hs \
+       src/FST/Reversal.hs \
+       src/FST/MinimalBrzozowski.hs \
+       src/FST/LBFA.hs \
+       src/FST/AutomatonInterface.hs \
+       src/FST/TransducerTypes.hs \
+       src/FST/Transducer.hs \
+       src/FST/RunTransducer.hs \
+       src/FST/DeterministicT.hs \
+       src/FST/ReversalT.hs \
+       src/FST/MinimalTBrzozowski.hs \
+       src/FST/EpsilonFreeT.hs \
+       src/FST/Arguments.hs \
+       src/FST/RRegTypes.hs \
+       src/FST/LBFT.hs \
+       src/FST/NReg.hs \
+       src/FST/Parse.hs \
+       src/FST/FileImport.hs \
+       src/FST/TransducerInterface.hs \
+       src/FST/Info.hs \
+       src/FST/Main.hs
 PROG_ARGS += -u soda.fst
 STDIN_FILE = PLONK
-HC_OPTS += -i. -package array -package base -package haskell98
+HC_OPTS += -isrc -package array -package base -package haskell98
 include $(TOP)/mk/target.mk

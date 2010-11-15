@@ -12,6 +12,6 @@ SRCS = src/ANSI.lhs \
        src/Cluster.lhs \
        src/Clix.lhs \
        src/Xsact.lhs
-PROG_ARGS += -i pdbnt
+PROG_ARGS += -O-i -Opdbnt
 HC_OPTS += -isrc -package array -package base -package containers -package directory -package process -package random -package unix
 include $(TOP)/mk/target.mk
