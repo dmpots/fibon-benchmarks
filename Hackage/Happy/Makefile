@@ -20,4 +20,5 @@ SRCS = src/NameSet.hs \
        src/Main.lhs
 PROG_ARGS += -O-t . Bio.y ErlParser.ly HaskellParser.y TestInput.y
 HC_OPTS += -isrc -igenerated -package array -package base -package containers -package mtl -XCPP -XMagicHash
+CLEAN_FILES += Bio.hs ErlParser.hs HaskellParser.hs TestInput.hs
 include $(TOP)/mk/target.mk

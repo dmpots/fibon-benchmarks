@@ -30,4 +30,5 @@ SRCS = parsec-2/Text/ParserCombinators/Parsec/Pos.hs \
 PROG_ARGS += oregonator.sgl
 HC_OPTS += -isrc -igenerated -iparsec-2 -imersenne-random-pure64 -package base -package containers -package haskell98 -package mtl -package old-time -package random -XExistentialQuantification -XPolymorphicComponents
 CC_OPTS += -Imersenne-random-pure64/include -arch i386
+CLEAN_FILES += oregonator_output.dat
 include $(TOP)/mk/target.mk
