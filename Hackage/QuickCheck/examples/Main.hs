@@ -18,7 +18,9 @@ main = do
   cnt <- parseArgs
   let   
       stdgen = mkStdGen 42
-      args   = stdArgs {replay = Just (stdgen, 1), maxSuccess = cnt}
+      args   = stdArgs {chatty = False,
+                        replay = Just (stdgen, 1),
+                        maxSuccess = cnt}
 
   forM_ [   ExHeap.run
           , ExLambda.run

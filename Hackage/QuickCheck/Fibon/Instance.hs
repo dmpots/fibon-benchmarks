@@ -21,6 +21,6 @@ mkInstance Test = sharedConfig {
         flagConfig = flgCfg {runFlags = ["10"]}
     }
 mkInstance Ref  = sharedConfig {
-        flagConfig = flgCfg {runFlags = ["1000"]}
+        flagConfig = flgCfg {runFlags = ["100000"]}
     }
 
