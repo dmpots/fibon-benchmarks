@@ -78,9 +78,9 @@ SRCS = src/compiler/GF/Data/BacktrackM.hs \
        src/compiler/GF/Grammar/MMacros.hs \
        src/compiler/GF/Grammar.hs \
        src/compiler/GF/Compile/Concrete/TypeCheck.hs \
-       generated/GF/Grammar/Lexer.hs \
+       src/compiler/GF/Grammar/Lexer.hs \
        src/compiler/GF/Compile/Update.hs \
-       generated/GF/Grammar/Parser.hs \
+       src/compiler/GF/Grammar/Parser.hs \
        src/runtime/haskell/PGF/Printer.hs \
        src/compiler/GF/Quiz.hs \
        src/compiler/GF/Compile/PGFtoHaskell.hs \
@@ -147,5 +147,7 @@ CLEAN_FILES += BeschFre.gfo      \
                Prelude.gfo       \
                ResEng.gfo        \
                ResFre.gfo        \
-               ResRomance.gfo
+               ResRomance.gfo    \
+               src/compiler/GF/Grammar/Parser.hs \
+               src/compiler/GF/Grammar/Lexer.hs
 include $(TOP)/mk/target.mk
