@@ -1,6 +1,7 @@
 {-# OPTIONS -fglasgow-exts -cpp #-}
 {-# LINE 3 "src\GF\Grammar\Lexer.x" #-}
 
+{-# LANGUAGE BangPatterns #-}
 module GF.Grammar.Lexer
          ( Token(..), Posn(..)
          , P, runP, lexer, getPosn, failLoc
