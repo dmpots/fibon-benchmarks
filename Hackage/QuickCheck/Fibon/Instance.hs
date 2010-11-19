@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "qc.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "qc"
   }
 flgCfg = flagConfig sharedConfig

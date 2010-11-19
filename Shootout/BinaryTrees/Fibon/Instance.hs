@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "binarytrees.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "binarytrees"
   }
 flgCfg = flagConfig sharedConfig

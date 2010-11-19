@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(OutputFile "output000.bmp", Diff "output.expected.bmp")]
+    , expectedExit   = ExitSuccess
     , exeName        = "repa-fft3d"
   }
 flgCfg = flagConfig sharedConfig

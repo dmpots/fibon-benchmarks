@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "xsact.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "xsact"
   }
 flgCfg = flagConfig sharedConfig

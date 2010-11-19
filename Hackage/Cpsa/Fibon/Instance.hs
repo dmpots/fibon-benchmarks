@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "cpsa.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "cpsa"
   }
 flgCfg = flagConfig sharedConfig
@@ -22,5 +23,6 @@ mkInstance Test = sharedConfig {
     }
 mkInstance Ref  = sharedConfig {
         flagConfig = flgCfg {runFlags = ["nsl5.lisp"]}
+      , expectedExit   = ExitFailure 1
     }
 

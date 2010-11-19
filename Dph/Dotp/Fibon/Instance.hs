@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "Dotp.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "Dotp"
   }
 flgCfg = flagConfig sharedConfig

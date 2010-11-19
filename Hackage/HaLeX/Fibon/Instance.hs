@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "halex.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "halex"
   }
 flgCfg = flagConfig sharedConfig

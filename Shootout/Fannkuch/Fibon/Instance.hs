@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "fannkuch.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "fannkuch"
   }
 flgCfg = flagConfig sharedConfig

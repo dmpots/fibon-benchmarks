@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "ga.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "ga"
   }
 flgCfg = flagConfig sharedConfig

@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "repa-mmult.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "repa-mmult"
   }
 flgCfg = flagConfig sharedConfig

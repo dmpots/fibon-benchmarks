@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "chameneosredux.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "chameneosredux"
   }
 flgCfg = flagConfig sharedConfig

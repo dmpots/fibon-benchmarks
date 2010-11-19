@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "palindromes.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "palindromes"
   }
 flgCfg = flagConfig sharedConfig

@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = []
+    , expectedExit   = ExitSuccess
     , exeName        = "hsbzip"
   }
 flgCfg = flagConfig sharedConfig

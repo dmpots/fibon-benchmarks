@@ -12,6 +12,7 @@ sharedConfig = BenchmarkInstance {
       , runFlags       = ["--src", "--make", "-f", "haskell"]
       }
     , output         = []
+    , expectedExit   = ExitSuccess
     , stdinInput     = Nothing
     , exeName        = "gf"
   }

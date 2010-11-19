@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "QsortDph.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "QsortDph"
   }
 flgCfg = flagConfig sharedConfig

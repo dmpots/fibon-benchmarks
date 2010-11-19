@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "crypto.stdout.expected")]
+    , expectedExit   = ExitSuccess
     , exeName        = "crypto"
   }
 flgCfg = flagConfig sharedConfig

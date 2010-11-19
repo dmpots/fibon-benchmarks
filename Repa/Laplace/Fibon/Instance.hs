@@ -13,6 +13,7 @@ sharedConfig = BenchmarkInstance {
       }
     , stdinInput     = Nothing
     , output         = [(OutputFile "laplace.bmp", Diff "laplace.expected.bmp")]
+    , expectedExit   = ExitSuccess
     , exeName        = "repa-laplace"
   }
 flgCfg = flagConfig sharedConfig
