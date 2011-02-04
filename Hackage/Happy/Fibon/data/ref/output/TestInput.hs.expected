@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -fno-warn-overlapping-patterns #-}
+{-# OPTIONS_GHC -w #-}
 module Parser ( parseModule, parseStmt, parseIdentifier, parseType,
 		parseHeader ) where
 
@@ -40,7 +40,7 @@ import GHC.Exts
 import Data.Char
 import Control.Monad    ( mplus )
 
--- parser produced by Happy Version 1.18.5
+-- parser produced by Happy Version 1.18.6
 
 data HappyAbsSyn 
 	= HappyTerminal ((Located Token))
@@ -20941,6 +20941,7 @@ happyFail  i tk (HappyState (action)) sts stk =
 
 -- Internal happy errors:
 
+notHappyAtAll :: a
 notHappyAtAll = error "Internal Happy error\n"
 
 -----------------------------------------------------------------------------
@@ -20967,7 +20968,7 @@ happyDontSeq a b = b
 -- of deciding to inline happyGoto everywhere, which increases the size of
 -- the generated parser quite a bit.
 
-{-# LINE 310 "templates/GenericTemplate.hs" #-}
+{-# LINE 311 "templates/GenericTemplate.hs" #-}
 {-# NOINLINE happyShift #-}
 {-# NOINLINE happySpecReduce_0 #-}
 {-# NOINLINE happySpecReduce_1 #-}

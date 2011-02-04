@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -fno-warn-overlapping-patterns #-}
+{-# OPTIONS_GHC -w #-}
 {-# OPTIONS -Wwarn -w #-}
 -- The above warning supression flag is a temporary kludge.
 -- While working on this module you are encouraged to remove it and fix
@@ -57,7 +57,7 @@ import System.Exit
 
 #include "HsVersions.h"
 
--- parser produced by Happy Version 1.18.5
+-- parser produced by Happy Version 1.18.6
 
 data HappyAbsSyn 
 	= HappyTerminal (Located CmmToken)
@@ -5437,6 +5437,7 @@ happyFail  i tk (HappyState (action)) sts stk =
 
 -- Internal happy errors:
 
+notHappyAtAll :: a
 notHappyAtAll = error "Internal Happy error\n"
 
 -----------------------------------------------------------------------------
@@ -5463,7 +5464,7 @@ happyDontSeq a b = b
 -- of deciding to inline happyGoto everywhere, which increases the size of
 -- the generated parser quite a bit.
 
-{-# LINE 310 "templates/GenericTemplate.hs" #-}
+{-# LINE 311 "templates/GenericTemplate.hs" #-}
 {-# NOINLINE happyShift #-}
 {-# NOINLINE happySpecReduce_0 #-}
 {-# NOINLINE happySpecReduce_1 #-}
