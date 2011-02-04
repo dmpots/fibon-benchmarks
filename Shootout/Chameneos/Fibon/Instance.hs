@@ -1,5 +1,5 @@
 {-# OPTIONS_GHC -fno-warn-missing-signatures #-}
-module Fibon.Benchmarks.Shootout.ChameneosRedux.Fibon.Instance(
+module Fibon.Benchmarks.Shootout.Chameneos.Fibon.Instance(
   mkInstance
 )
 where
