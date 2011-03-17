@@ -66,4 +66,7 @@ Executable pappy
 Executable java-parser
      Main-is:        JavaMonad.hs
      Hs-source-dirs: src, java-parser
-     Build-depends:  base >= 4 && < 5, haskell98
+     Build-depends:  base >= 4 && < 5
+
+     if impl(ghc < 7.1)
+        build-depends: haskell98

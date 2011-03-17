@@ -29,7 +29,7 @@ module CommandLine ( process_commandline
 -- imports
 import Data.Word
 import Prelude
-import System
+import System.Exit
 import System.Console.GetOpt
 
 -- local imports

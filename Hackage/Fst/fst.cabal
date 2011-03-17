@@ -12,7 +12,6 @@ author:              Markus Forsberg
 maintainer:          Markus Forsberg <markus@cs.chalmers.se>
 homepage:            http://www.cs.chalmers.se/~markus/fstStudio/
 build-type:          Simple
-build-depends:       base, haskell98
 Cabal-Version:       >= 1.2
 tested-with:         GHC==6.8.2
 
@@ -28,8 +27,9 @@ Library
         ghc-prof-options:    -prof -auto-all
 
 Executable fst
-        executable:          fst
         main-is:             FST/Main.hs
-        Build-Depends:       base >=4 && <5, haskell98, array
+        Build-Depends:       base >=4 && <5, array
+        if impl(ghc < 7.1)
+          build-depends:     haskell98
         ghc-prof-options:    -prof -auto-all
 

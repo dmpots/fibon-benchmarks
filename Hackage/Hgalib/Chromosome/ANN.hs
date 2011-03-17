@@ -16,7 +16,7 @@ where
 
 import GA
 import Control.Monad.State.Strict
-import List
+import Data.List
 import Random
 
 -- |An Artificial Neural Network
