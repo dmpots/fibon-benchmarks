@@ -15,7 +15,7 @@ Homepage:      http://simgi.sourceforge.net/
 cabal-version: >= 1.6
 extra-source-files: README
 
-Executable simgi
+Executable Simgi
   Build-Depends:  base >= 2 && < 5, containers >= 0.1.0.0,
                   mtl >= 1.1.0.2,
                   random >= 1.0.0.1, 

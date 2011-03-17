@@ -46,6 +46,6 @@ Library
         Exposed-modules:
                 Data.Set.TernarySet, Data.Set.StringSet, Data.Map.TernaryMap, Data.Map.StringMap
 
-Executable tdict
+Executable TernaryTrees
   Main-Is:        Main.hs
   Build-Depends:  base >=3 && <5, binary == 0.5.*

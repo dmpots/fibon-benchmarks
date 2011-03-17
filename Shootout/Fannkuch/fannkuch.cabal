@@ -46,7 +46,7 @@ Build-type:          Simple
 Cabal-version:       >=1.2
 
 
-Executable fannkuch
+Executable Fannkuch
   -- .hs or .lhs file containing the Main module.
   Main-is:             fannkuch.hs
   

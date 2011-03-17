@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "mandelbrot.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "mandelbrot"
+    , exeName        = "Mandelbrot"
   }
 flgCfg = flagConfig sharedConfig
 

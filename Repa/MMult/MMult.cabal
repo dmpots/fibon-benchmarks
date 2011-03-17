@@ -15,7 +15,7 @@ Description:
 Synopsis:
         Examples using the Repa array library.
 
-Executable repa-mmult
+Executable MMult
   Build-depends: 
         base                 == 4.*,
         dph-prim-par,

@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Just "eqn.txt"
     , output         = [(Stdout, Diff "agum.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "agum"
+    , exeName        = "Agum"
   }
 flgCfg = flagConfig sharedConfig
 

@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "ga.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "ga"
+    , exeName        = "Hgalib"
   }
 flgCfg = flagConfig sharedConfig
 

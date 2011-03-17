@@ -29,7 +29,7 @@ Library
   hs-source-dirs:       src
   exposed-modules:      Data.Algorithms.Palindromes.Palindromes
 
-Executable	            palindromes
+Executable	            Palindromes
   Main-is:				Data/Algorithms/Palindromes/Main.hs
   ghc-options:          -Wall
   hs-source-dirs:       src

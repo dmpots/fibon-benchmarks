@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stderr, Diff "happy.stderr.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "happy"
+    , exeName        = "Happy"
   }
 flgCfg = flagConfig sharedConfig
 

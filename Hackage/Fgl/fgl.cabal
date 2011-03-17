@@ -45,7 +45,7 @@ Library
   build-depends:	base < 5, mtl, containers, array
   extensions: MultiParamTypeClasses, OverlappingInstances, FlexibleInstances, ScopedTypeVariables
 
-executable fgl
+executable Fgl
   main-is: Main.hs
   build-depends:	base < 5, mtl, containers, array, bytestring
   extensions: MultiParamTypeClasses, OverlappingInstances, FlexibleInstances, ScopedTypeVariables

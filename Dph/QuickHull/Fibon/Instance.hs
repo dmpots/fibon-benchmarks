@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "quickhull.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "quickhull"
+    , exeName        = "QuickHull"
   }
 flgCfg = flagConfig sharedConfig
 

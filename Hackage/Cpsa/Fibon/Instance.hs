@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "cpsa.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "cpsa"
+    , exeName        = "Cpsa"
   }
 flgCfg = flagConfig sharedConfig
 

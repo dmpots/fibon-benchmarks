@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "pderiv.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "pderiv"
+    , exeName        = "Regex"
   }
 flgCfg = flagConfig sharedConfig
 

@@ -27,7 +27,7 @@ Library
   GHC-Options:
     -Wall -fno-warn-name-shadowing -fwarn-unused-imports
 
-Executable agum
+Executable Agum
   Main-Is:		Algebra/AbelianGroup/Main.hs
   Build-Depends:	base >= 3 && < 5, containers
   Other-Modules:	Algebra.AbelianGroup.UnificationMatching

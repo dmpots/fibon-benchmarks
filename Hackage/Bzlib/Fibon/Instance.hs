@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = []
     , expectedExit   = ExitSuccess
-    , exeName        = "hsbzip"
+    , exeName        = "Bzlib"
   }
 flgCfg = flagConfig sharedConfig
 

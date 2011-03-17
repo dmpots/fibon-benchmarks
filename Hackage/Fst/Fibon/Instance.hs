@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Just "PLONK"
     , output         = [(Stdout, Diff "fst.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "fst"
+    , exeName        = "Fst"
   }
 flgCfg = flagConfig sharedConfig
 

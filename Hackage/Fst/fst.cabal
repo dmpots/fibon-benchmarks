@@ -26,7 +26,7 @@ Library
                              FST.StateMonad, FST.Transducer, FST.TransducerInterface, FST.TransducerTypes, FST.Utils
         ghc-prof-options:    -prof -auto-all
 
-Executable fst
+Executable Fst
         main-is:             FST/Main.hs
         Build-Depends:       base >=4 && <5, array
         if impl(ghc < 7.1)

@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "sumsq.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "sumsq"
+    , exeName        = "Sumsq"
   }
 flgCfg = flagConfig sharedConfig
 

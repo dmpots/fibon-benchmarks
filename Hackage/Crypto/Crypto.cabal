@@ -59,7 +59,7 @@ Library
                  Codec.Encryption.AESAux,
                  Data.Digest.MD5Aux
 
-Executable      crypto
+Executable      Crypto
   Main-Is:         Main.hs
   Build-Depends:   base >3 && <5, bytestring, array, random
 

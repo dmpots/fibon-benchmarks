@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "spectralnorm.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "spectralnorm"
+    , exeName        = "SpectralNorm"
   }
 flgCfg = flagConfig sharedConfig
 

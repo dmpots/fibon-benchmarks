@@ -17,7 +17,7 @@ sharedConfig = BenchmarkInstance {
                         (OutputFile "oregonator_output.dat", 
                          Diff       "oregonator_output.dat.expected") ]
     , expectedExit   = ExitSuccess
-    , exeName        = "simgi"
+    , exeName        = "Simgi"
   }
 flgCfg = flagConfig sharedConfig
 

@@ -35,7 +35,7 @@ Library
                                 Language.HaLex.Fa2RegExp, Language.HaLex.Parser, Language.HaLex.RegExp2Fa, Language.HaLex.FaAsDiGraph,
                                 Language.HaLex.FaOperations, Language.HaLex.Util, Language.HaLex.Equivalence
 
-Executable halex
+Executable HaLex
            executable:          halex
            main-is:             halex.hs
            hs-source-dirs:      HaLeX_tool, HaLeX_lib

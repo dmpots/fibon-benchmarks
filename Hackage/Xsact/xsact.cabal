@@ -23,7 +23,7 @@ Cabal-Version:  >= 1.2
 Build-Type:     Simple
 Tested-With:    GHC==6.8.2
 
-Executable     xsact
+Executable     Xsact
                Main-Is:        Xsact.lhs
                Hs-Source-Dirs: src
                Build-Depends:  base >3 && <5, containers, random, array, unix, directory, process

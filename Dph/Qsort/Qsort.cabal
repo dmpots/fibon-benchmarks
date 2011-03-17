@@ -5,7 +5,7 @@ Category:            Benchmarking
 Build-type:          Simple
 Cabal-version:       >=1.2
 
-Executable QsortDph
+Executable Qsort
   Main-is:             vect.hs
   Hs-Source-Dirs:      src ../_DphLib
   Build-depends:       base == 4.*,

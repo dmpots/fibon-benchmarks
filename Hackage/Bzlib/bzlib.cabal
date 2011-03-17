@@ -52,7 +52,7 @@ library
     include-dirs:  cbits
     install-includes: bzlib.h
 
-executable hsbzip
+executable Bzlib
   main-is: Main.hs
   other-modules:   Codec.Compression.BZip.Stream
   build-depends: base > 3 && < 5, bytestring >= 0.9

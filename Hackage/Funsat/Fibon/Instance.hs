@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "funsat.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "funsat"
+    , exeName        = "Funsat"
   }
 flgCfg = flagConfig sharedConfig
 

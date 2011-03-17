@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(OutputFile "out.bmp", Diff "out.expected.bmp")]
     , expectedExit   = ExitSuccess
-    , exeName        = "repa-blur"
+    , exeName        = "Blur"
   }
 flgCfg = flagConfig sharedConfig
 

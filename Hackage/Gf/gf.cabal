@@ -56,7 +56,7 @@ library
     Data.Binary.Get
     Data.Binary.Builder
 
-executable gf
+executable Gf
   build-depends: base >= 4.2,
                  array,
                  containers,

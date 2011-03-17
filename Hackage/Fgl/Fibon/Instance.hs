@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "fgl.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "fgl"
+    , exeName        = "Fgl"
   }
 flgCfg = flagConfig sharedConfig
 

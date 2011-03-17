@@ -27,7 +27,7 @@ Build-type:          Simple
 Extra-source-files:  README CHANGES
 
 
-Executable funsat
+Executable Funsat
  Main-is:             Main.hs
  Extensions:          CPP,
                       BangPatterns,

@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Nothing
     , output         = [(Stdout, Diff "java-parser.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "java-parser"
+    , exeName        = "Pappy"
   }
 flgCfg = flagConfig sharedConfig
 

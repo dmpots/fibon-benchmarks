@@ -14,7 +14,7 @@ sharedConfig = BenchmarkInstance {
     , stdinInput     = Just "words"
     , output         = [(Stdout, Diff "tdict.stdout.expected")]
     , expectedExit   = ExitSuccess
-    , exeName        = "tdict"
+    , exeName        = "TernaryTrees"
   }
 flgCfg = flagConfig sharedConfig
 
