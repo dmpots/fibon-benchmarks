@@ -21,7 +21,7 @@ main = defaultMainWithHooks defaultUserHooks{ hookedPrograms = [perlProgram],
 					      instHook  = myInstall }
 
 perlProgram = simpleProgram "perl"
-happyBuildDir lbi = (buildDir lbi) </> "happy"
+happyBuildDir lbi = (buildDir lbi) </> "Happy"
 
 -- hack to turn cpp-style '# 27 "GenericTemplate.hs"' into 
 -- '{-# LINE 27 "GenericTemplate.hs" #-}'.
