@@ -25,11 +25,18 @@ mkInstance Test = sharedConfig {
       , output    = [(OutputFile "bzlib.cabal.bz2.roundtrip", 
                       Diff       "bzlib.cabal.bz2")]
     }
-mkInstance Ref  = sharedConfig {
+mkInstance Train = sharedConfig {
       flagConfig = flgCfg {
           runFlags = ["mito.aa.bz2"]
       }
       , output   = [(OutputFile "mito.aa.bz2.roundtrip", 
+                     Diff       "mito.aa.bz2")]
+    }
+mkInstance Ref  = sharedConfig {
+      flagConfig = flgCfg {
+          runFlags = words "-r 300 mito.aa.bz2"
+      }
+      , output   = [(OutputFile "mito.aa.bz2.roundtrip",
                      Diff       "mito.aa.bz2")]
     }
 

@@ -3,9 +3,12 @@ module Main(main) where
 import qualified Data.ByteString.Lazy as B
 import qualified Codec.Compression.BZip as BZip
 import System.Environment
+import Fibon.Run.BenchmarkHelper
 
 
-main = do
+main = fibonReplicateMain oldmain
+
+oldmain = do
   fs <- getArgs
   mapM_ roundTrip fs
 

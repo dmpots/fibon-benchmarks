@@ -54,8 +54,9 @@ library
 
 executable Bzlib
   main-is: Main.hs
+  hs-source-dirs: . ../../../../../tools/fibon-run
   other-modules:   Codec.Compression.BZip.Stream
-  build-depends: base > 3 && < 5, bytestring >= 0.9
+  build-depends: base > 3 && < 5, bytestring >= 0.9, deepseq
   includes:        bzlib.h
   c-sources:     cbits/blocksort.c cbits/bzlib.c cbits/compress.c
                   cbits/crctable.c cbits/decompress.c cbits/huffman.c
