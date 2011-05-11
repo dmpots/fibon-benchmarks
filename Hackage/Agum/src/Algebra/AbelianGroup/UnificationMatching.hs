@@ -74,6 +74,8 @@ import Data.Map (Map)
 import qualified Data.Map as Map
 import Algebra.AbelianGroup.IntLinEq
 
+import Fibon.Run.BenchmarkHelper
+
 -- Chapter 8, Section 5 of the Handbook of Automated Reasoning by
 -- Franz Baader and Wayne Snyder describes unification and matching in
 -- communtative/monoidal theories.  This module refines the described
@@ -123,6 +125,8 @@ import Algebra.AbelianGroup.IntLinEq
 -- identity element, the plus sign is the group operation, and the
 -- minus sign is the group inverse.
 newtype Term = Term (Map String Int) deriving Eq
+instance NFData Term where
+  rnf (Term t) = rnf t
 
 -- Constructors
 
@@ -190,6 +194,8 @@ newtype Equation = Equation (Term, Term) deriving Eq
 -- methods, the substitution is a list of maplets, and the variable
 -- and the term in each element of the list are separated by a colon.
 newtype Substitution = Substitution (Map String Term) deriving Eq
+instance NFData Substitution where
+  rnf (Substitution s) = rnf s
 
 -- | Construct a substitution from a list of variable-term pairs.
 subst :: [(String, Term)] -> Substitution

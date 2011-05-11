@@ -20,25 +20,35 @@ module Main (main, test) where
 import System.IO (isEOF, hFlush, stdout)
 import Algebra.AbelianGroup.UnificationMatching
 
+import Fibon.Run.BenchmarkHelper as Fibon
+import Control.Monad
+
 -- Test Routine
 
 -- Given an equation, display a unifier and a matcher.
-test :: String -> IO ()
-test prob =
+test :: Int -> String -> IO ()
+test 0 _prob = return ()
+test n prob  =
+    let onLast = lastIter (n == 1) in
     case readM prob of
       Err err -> putStrLn err
       Ans (Equation (t0, t1)) ->
           do
-            putStr "Problem:   "
-            print $ Equation (t0, t1)
+            onLast $ putStr "Problem:   "
+            onLast $ print $ Equation (t0, t1)
             let subst = unify $ Equation (t0, t1)
-            putStr "Unifier:   "
-            print subst
-            putStr "Matcher:   "
+            deepseq subst $ do
+            onLast $ putStr "Unifier:   "
+            onLast $ print subst
+            onLast $ putStr "Matcher:   "
             case match $ Equation (t0, t1) of
-              Err err -> putStrLn err
-              Ans subst -> print subst
-            putStrLn ""
+              Err err -> onLast $ putStrLn err
+              Ans subst -> onLast $ print subst
+            onLast $ putStrLn ""
+            test (n-1) prob
+    where
+    lastIter :: Bool -> IO () -> IO ()
+    lastIter cond act = when cond act
 
 readM :: (Read a, Monad m) => String -> m a
 readM s =
@@ -58,15 +68,17 @@ instance Monad AnsErr where
     fail          = Err
 
 -- Main loop
-
 main :: IO ()
-main =
+main = fibonMain oldmain
+
+oldmain :: Int -> IO ()
+oldmain n =
     do
       putStrLn "Abelian group unification and matching -- :? for help"
-      loop
+      loop n
 
-loop :: IO ()
-loop =
+loop :: Int -> IO ()
+loop n =
     do
       putStr "agum> "
       hFlush stdout
@@ -83,13 +95,13 @@ loop =
                 _ | line == ":?" || line == ":help" ->
                       do
                         help
-                        loop
+                        loop n
                   | line == ":quit" ->
                       return ()
                   | otherwise ->
                       do
-                        test line
-                        loop
+                        test n line
+                        loop n
 
 help :: IO ()
 help =

@@ -21,7 +21,10 @@ flgCfg = flagConfig sharedConfig
 mkInstance Test = sharedConfig {
         flagConfig = flgCfg
     }
-mkInstance Ref  = sharedConfig {
+mkInstance Train = sharedConfig {
         flagConfig = flgCfg
+    }
+mkInstance Ref  = sharedConfig {
+        flagConfig = flgCfg {runFlags = words "-r 700"}
     }
 

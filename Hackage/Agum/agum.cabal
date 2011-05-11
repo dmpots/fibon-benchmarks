@@ -29,9 +29,9 @@ Library
 
 Executable Agum
   Main-Is:		Algebra/AbelianGroup/Main.hs
-  Build-Depends:	base >= 3 && < 5, containers
+  Build-Depends:	base >= 3 && < 5, containers, deepseq
   Other-Modules:	Algebra.AbelianGroup.UnificationMatching
                         Algebra.AbelianGroup.IntLinEq
-  Hs-Source-Dirs:	src
+  Hs-Source-Dirs:	src ../../../../../tools/fibon-run
   GHC-Options:
     -Wall -fno-warn-name-shadowing -fwarn-unused-imports
