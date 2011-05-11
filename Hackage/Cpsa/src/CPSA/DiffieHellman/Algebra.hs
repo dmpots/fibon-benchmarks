@@ -140,7 +140,7 @@ expg t n = M.map (* n) t
 
 mul :: Group -> Group -> Group
 mul t t' =
-    M.foldWithKey f t' t      -- Fold over the mappings in t
+    M.foldrWithKey f t' t      -- Fold over the mappings in t
     where
       f x c t =                 -- Alter the mapping of
           M.alter (g c) x t     -- variable x in t
@@ -754,7 +754,7 @@ expSubst subst t0 t1 =
 
 groupSubst :: IdMap -> Group -> Group
 groupSubst subst t =
-    M.foldWithKey f M.empty t
+    M.foldrWithKey f M.empty t
     where
       f x n t =
           mul (expg (groupLookup subst x) n) t
@@ -1199,7 +1199,7 @@ reify domain (Env (_, env)) =
 matchRenaming :: GenEnv -> Bool
 matchRenaming (gen, Env (v, e)) =
     nonGrp S.empty (M.elems e) &&
-    groupMatchRenaming v gen (M.foldWithKey grp M.empty e)
+    groupMatchRenaming v gen (M.foldrWithKey grp M.empty e)
     where
       nonGrp _ [] = True
       nonGrp s (I x:e) =

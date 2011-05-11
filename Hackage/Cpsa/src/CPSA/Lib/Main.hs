@@ -13,6 +13,7 @@ module Main (main) where
 import Numeric
 import System.IO
 import System.IO.Error
+import Control.Exception as CE
 #if defined HAVE_PAR
 import Control.Parallel
 #endif
@@ -63,7 +64,7 @@ main =
     do
       (p, params) <- start options $ interp algs
       sexprs <- readSExprs p
-      sexprs <- try (expand sexprs) -- Expand macros
+      sexprs <- CE.try (expand sexprs) -- Expand macros
       case sexprs of
         Left err -> abort (ioeGetErrorString err)
         Right sexprs ->
@@ -106,7 +107,7 @@ select params sexprs =
 go :: Algebra t p g s e c => String -> g -> Params -> [SExpr Pos] -> IO ()
 go name origin params sexprs =
     do
-      preskels <- try (loadSExprs name origin sexprs)
+      preskels <- CE.try (loadSExprs name origin sexprs)
       case preskels of          -- Load protocols and preskeletons
         Left err -> abort (ioeGetErrorString err)
         Right preskels ->

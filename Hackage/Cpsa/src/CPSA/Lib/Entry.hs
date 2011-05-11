@@ -15,6 +15,7 @@ module CPSA.Lib.Entry (start, usage, abort, success, algOptions,
 import Numeric
 import System.IO
 import System.IO.Error
+import Control.Exception as CE
 import System.Environment
 import System.Console.GetOpt
 import System.Exit
@@ -65,7 +66,7 @@ usage options errs =
 readSExpr :: PosHandle -> IO (Maybe (SExpr Pos))
 readSExpr p =
     do
-      x <- try (load p)
+      x <- CE.try (load p)
       case x of
         Right x ->
             return x

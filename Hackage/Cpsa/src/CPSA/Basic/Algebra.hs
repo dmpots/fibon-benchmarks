@@ -729,7 +729,7 @@ idempotentEnvFor :: Env -> [Term] -> Bool
 idempotentEnvFor (Env r) ts =
     all (allId $ flip S.notMember dom) ts
     where
-      dom = M.foldWithKey f S.empty r -- The domain of r
+      dom = M.foldrWithKey f S.empty r -- The domain of r
       f x (I y) dom
           | x == y = dom        -- Ignore trivial bindings
           | otherwise = S.insert x dom
