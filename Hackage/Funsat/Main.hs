@@ -34,6 +34,7 @@ import qualified Data.Set as Set
 import qualified Language.CNF.Parse.ParseDIMACS as ParseDIMACS
 import qualified Text.Tabular as Tabular
 
+import Fibon.Run.BenchmarkHelper
 
 options :: [OptDescr (Options -> Options)]
 options =
@@ -117,7 +118,11 @@ usageHeader :: String
 usageHeader = "\nUsage: funsat [OPTION...] cnf-files..."
 
 main :: IO ()
-main = do
+main = fibonMain oldmain
+
+oldmain :: Int -> IO ()
+oldmain 0 = return ()
+oldmain n = do
     (opts, files) <- getArgs >>= validateArgv
     when (optVerify opts) $ do
         exitWith ExitSuccess
@@ -131,27 +136,28 @@ main = do
         putStrLn (showVersion version)
         exitWith ExitSuccess
 
-    putStr "Feature config: "
-    putStr . concat $ intersperse ", "
+    when lastIter $ putStr "Feature config: "
+    when lastIter $ putStr . concat $ intersperse ", "
         [ if (optUseVsids opts) then "vsids" else "no vsids"
         , if (optUseRestarts opts) then "restarts" else "no restarts"
         , "unsat checking"
         ]
-    putStr "\n"
+    when lastIter $ putStr "\n"
     when (optPrintFeatures opts) $ exitWith ExitSuccess
 
     when (null files) $
         ioError (userError (usageInfo usageHeader options))
 
     forM_ files (parseAndSolve opts)
+    oldmain (n-1)
          where
          parseAndSolve opts path = do
             --parseStart <- getCurrentTime
             cnf <- parseCNF path
-            putStrLn $ show (numVars cnf) ++ " variables, "
+            when lastIter $ putStrLn $ show (numVars cnf) ++ " variables, "
                        ++ show (numClauses cnf) ++ " clauses"
             Set.map seqList (clauses cnf)
-              `seq` putStrLn ("Solving " ++ path ++ " ...")
+              `seq` when lastIter $ putStrLn ("Solving " ++ path ++ " ...")
             --parseEnd <- getCurrentTime
 
             --startingTime <- getCurrentTime
@@ -159,19 +165,20 @@ main = do
                 (solution, stats, rt) = solve cfg cnf
             --endingTime <- solution `seq` getCurrentTime
 --            print solution
-            print $ statTable stats 
+            when lastIter $ print $ statTable stats 
 --                     `Tabular.combine`
 --                     Tabular.mkTable
 --                      [[ WrapString "Parsing time "
 --                       , WrapString $ show (diffUTCTime parseEnd parseStart) ]
 --                      ,[ WrapString "Real time "
 --                       , WrapString $ show (diffUTCTime endingTime startingTime)]]
-            putStr "Verifying solution..."
+            when lastIter $ putStr "Verifying solution..."
             case verify solution rt cnf of
               Just errorWitness ->
                   do putStrLn "\n--> VERIFICATION ERROR!"
                      print errorWitness
-              Nothing -> putStrLn "succeeded."
+              Nothing -> when lastIter $ putStrLn "succeeded."
+         lastIter = n == 1
 
 seqList l@[] = l
 seqList l@(x:xs) = x `seq` seqList xs `seq` l

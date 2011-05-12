@@ -47,6 +47,7 @@ Executable Funsat
 
  CPP-options:         -DTESTING
  Hs-source-dirs:      . src bimap bitset fgl parse-dimacs parsec syb/src
+                      ../../../../../tools/fibon-run
  Other-modules:
                       Control.Monad.MonadST
                       Funsat.FastDom
@@ -69,7 +70,10 @@ Executable Funsat
                       -- for parsec
                       bytestring,
                       -- for parse-dimacs
-                      array
+                      array,
+
+                      -- for fibon
+                      deepseq
 
 -- Library
 --  Buildable:           False
