@@ -68,13 +68,14 @@ executable Gf
                  process,
                  pretty,
                  mtl,
-                 haskeline
+                 haskeline,
+                 deepseq
   build-tools: happy, alex
   if os(windows)
     build-depends: Win32
   else
     build-depends: unix
-  hs-source-dirs: src/compiler src/runtime/haskell
+  hs-source-dirs: src/compiler src/runtime/haskell ../../../../../tools/fibon-run
   extensions:
   main-is: GF.hs
   other-modules:

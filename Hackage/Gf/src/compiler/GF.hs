@@ -18,8 +18,13 @@ import System.Win32.Console
 import System.Win32.NLS
 #endif
 
+import Fibon.Run.BenchmarkHelper
+
 main :: IO ()
-main = do
+main = fibonReplicateMain oldmain
+
+oldmain :: IO ()
+oldmain = do
 #ifdef mingw32_HOST_OS
   codepage <- getACP
   setConsoleCP codepage
