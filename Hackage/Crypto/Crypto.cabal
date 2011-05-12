@@ -61,7 +61,8 @@ Library
 
 Executable      Crypto
   Main-Is:         Main.hs
-  Build-Depends:   base >3 && <5, bytestring, array, random
+  Hs-source-dirs:  . ../../../../../tools/fibon-run
+  Build-Depends:   base >3 && <5, bytestring, array, random, deepseq
 
 Executable      SymmetricTest
   Buildable:       False

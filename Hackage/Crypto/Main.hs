@@ -23,41 +23,50 @@ import Numeric
 import qualified Data.ByteString as B
 import System.Environment
 
+import Fibon.Run.BenchmarkHelper
 
-main = do
+main = fibonMain oldmain
+
+oldmain 0 = return ()
+oldmain n = do
   fs <- getArgs
-  mapM_ crypto fs
+  mapM_ (crypto (n == 1)) fs
+  oldmain (n-1)
 
-crypto :: FilePath -> IO ()
-crypto f = do
-  putStrLn f
+crypto :: Bool -> FilePath -> IO ()
+crypto fibonShow f = do
+  when fibonShow (putStrLn f)
   d <- B.unpack `liftM` B.readFile f
   sequence_ $ algs <*> [d]
   where
-    algs = [aes, des, blowfish]
+    algs = [aes fibonShow, des fibonShow, blowfish fibonShow]
 
-aes :: [Word8] -> IO ()
-aes = crypt listFromOctets AES.encrypt ak32
+aes :: Bool -> [Word8] -> IO ()
+aes fibonShow = crypt fibonShow listFromOctets AES.encrypt ak32
 
-blowfish :: [Word8] -> IO ()
-blowfish = crypt listFromOctets Blowfish.encrypt bk16
+blowfish :: Bool -> [Word8] -> IO ()
+blowfish fibonShow = crypt fibonShow listFromOctets Blowfish.encrypt bk16
 
-des :: [Word8] -> IO ()
-des = crypt listFromOctets DES.encrypt dk8
+des :: Bool -> [Word8] -> IO ()
+des fibonShow = crypt fibonShow listFromOctets DES.encrypt dk8
 
 crypt :: (Bits a, Integral a, Integral b) => 
-         ([Word8] -> [a]) -- conversion from Word8 to BlockSize
+         Bool             -- FIBON: Show output or not
+      -> ([Word8] -> [a]) -- conversion from Word8 to BlockSize
       -> (b -> a -> a)    -- encryption function
       -> b                -- encryption key
       -> [Word8]          -- input
       -> IO ()            -- print out the result
-crypt p e k d = output cypherText
+crypt fibonShow p e k d = output fibonShow cypherText
   where
   d' = p d
   cypherText = map (e k) d'
 
-output :: (Bits a, Integral a) => [a] -> IO ()
-output = putStrLn . Bubble.encode . MD5.hash . listToOctets
+output :: (Bits a, Integral a) => Bool -> [a] -> IO ()
+output fibonShow l =
+  if fibonShow then putStrLn s
+               else deepseq  s $ return ()
+    where s = Bubble.encode . MD5.hash . listToOctets $ l
 
 
 -- Encryption Keys
