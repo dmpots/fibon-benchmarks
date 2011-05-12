@@ -14,6 +14,8 @@ import Data.Char (isSpace, isDigit, isAlphaNum, isPrint, isAscii)
 import Data.IORef (IORef, newIORef, readIORef, writeIORef)
 import System.IO (Handle, hIsEOF, hGetChar, hLookAhead, hClose)
 
+import Fibon.Run.BenchmarkHelper
+
 -- An S-expression--all of its constructors are strict.
 data SExpr a
     = S !a !String                 -- A symbol
@@ -21,6 +23,12 @@ data SExpr a
     | N !a !Int                    -- An integer
     | L !a ![SExpr a]              -- A proper list
       deriving Eq
+
+instance NFData a => NFData (SExpr a) where
+  rnf (S a _) = rnf a
+  rnf (Q a _) = rnf a
+  rnf (N a _) = rnf a
+  rnf (L a l) = rnf a `seq` rnf l
 
 -- Printing support
 

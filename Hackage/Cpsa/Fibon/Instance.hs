@@ -21,8 +21,10 @@ flgCfg = flagConfig sharedConfig
 mkInstance Test = sharedConfig {
         flagConfig = flgCfg {runFlags = ["ns.scm"]}
     }
-mkInstance Ref  = sharedConfig {
+mkInstance Train = sharedConfig {
         flagConfig = flgCfg {runFlags = ["nsl5.lisp"]}
-      , expectedExit   = ExitFailure 1
+    }
+mkInstance Ref  = sharedConfig {
+        flagConfig = flgCfg {runFlags = words "-r 70 nsl5.lisp"}
     }
 

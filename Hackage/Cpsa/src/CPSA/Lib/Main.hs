@@ -30,6 +30,8 @@ import CPSA.Lib.Expand
 import qualified CPSA.Basic.Algebra
 import qualified CPSA.DiffieHellman.Algebra
 
+import Fibon.Run.BenchmarkHelper
+
 -- Default limit on the number of steps used to solve one problem.
 defaultStepLimit :: Int
 defaultStepLimit = 2000
@@ -55,12 +57,17 @@ data Params = Params
       tryYoungNodesFirst :: Bool, -- True when visiting young nodes first
       limit :: Int,             -- Step count limit
       bound :: Int,             -- Strand cound bound
-      margin :: Int }           -- Output line length
+      margin :: Int,            -- Output line length
+      fibonOutput :: Bool}      -- FIBON: used to show output
     deriving Show
 
 -- Entry point
 main :: IO ()
-main =
+main = fibonMain oldmain
+
+oldmain :: Int -> IO ()
+oldmain 0 = return ()
+oldmain n =
     do
       (p, params) <- start options $ interp algs
       sexprs <- readSExprs p
@@ -69,9 +76,10 @@ main =
         Left err -> abort (ioeGetErrorString err)
         Right sexprs ->
             if analyze params then
-                select params sexprs
+                select (params {fibonOutput = n == 1}) sexprs
             else
                 prettyPrint params sexprs
+      oldmain (n-1)
 
 readSExprs :: PosHandle -> IO [SExpr Pos]
 readSExprs p =
@@ -115,8 +123,8 @@ go name origin params sexprs =
               h <- outputHandle (file params)
               let m = margin params
               -- Print run time information
-              writeComment h m cpsaVersion
-              writeComment h m "All input read"
+              cmt params h cpsaVersion
+              cmt params h "All input read"
               case noIsoChk params of
                 True -> writeComment h m "Isomorphism checking disabled"
                 False -> return ()
@@ -213,7 +221,8 @@ interp algs flags =
                         tryYoungNodesFirst = False,
                         limit = defaultStepLimit,
                         bound = defaultStrandBound,
-                        margin = defaultMargin }
+                        margin = defaultMargin,
+                        fibonOutput = False }
     where
       loop [] params = return params
       loop (Output name : flags)  params
@@ -273,9 +282,15 @@ interp algs flags =
              abort msg
 
 -- Parameter driven S-expression printer
-wrt :: Params -> Handle -> SExpr a -> IO ()
+wrt :: NFData a => Params -> Handle -> SExpr a -> IO ()
 wrt p h sexpr =
-    writeLnSEexpr h (margin p) sexpr
+    if (fibonOutput p) then
+      writeLnSEexpr h (margin p) sexpr
+    else
+      deepseq sexpr (return ())
+
+cmt :: Params -> Handle -> String -> IO ()
+cmt p h c = if (fibonOutput p) then writeComment h (margin p) c else return ()
 
 -- A labeled and linked preskeleton
 data Algebra t p g s e c => LPreskel t p g s e c
@@ -416,11 +431,12 @@ step p h _ m _ n _ todo reducts
         do
           wrt p h (comment "Step limit exceeded--aborting run")
           dump p h (mktodo reducts todo) "Step limit exceeded"
-step p h _ _ _ _ _ todo reducts@(Reduct lk _ _  _  _ : _)
+step p h _ _ _ _ _ _todo _reducts@(Reduct lk _ _  _  _ : _)
     | nstrands (content lk) >= bound p = -- Check strand count
         do
           wrt p h (comment "Strand bound exceeded--aborting run")
-          dump p h (mktodo reducts todo)  "Strand bound exceeded"
+          -- Fibon: don't crash here, just stop
+          -- dump p h (mktodo reducts todo)  "Strand bound exceeded"
 step p h ks m oseen n seen todo (Reduct lk size cols kids dups : reducts)
     | size <= 0 =               -- Interpret empty reducts
         do
