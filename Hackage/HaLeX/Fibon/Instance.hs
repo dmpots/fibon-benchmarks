@@ -9,17 +9,24 @@ sharedConfig = BenchmarkInstance {
     flagConfig = FlagConfig {
         configureFlags = []
       , buildFlags     = []
-      , runFlags       = []
+      , runFlags       = ["-o","dfa.hs"]
       }
     , stdinInput     = Nothing
-    , output         = [(Stdout, Diff "halex.stdout.expected")]
+    , output         = [(OutputFile "dfa.hs", Diff "dfa.hs.expected")]
     , expectedExit   = ExitSuccess
     , exeName        = "HaLex"
   }
 flgCfg = flagConfig sharedConfig
 
 mkInstance :: InputSize -> BenchmarkInstance
-mkInstance Test = sharedConfig {flagConfig = flgCfg {runFlags = ["vowles"]}}
-mkInstance Ref  = sharedConfig {flagConfig = flgCfg {runFlags = ["real"]}}
+mkInstance Test = sharedConfig {
+    flagConfig = flgCfg {runFlags = (runFlags flgCfg) ++ ["vowles"]}
+  }
+mkInstance Train = sharedConfig {
+    flagConfig = flgCfg {runFlags = (runFlags flgCfg) ++ ["real"]}
+  }
+mkInstance Ref  = sharedConfig {
+    flagConfig = flgCfg {runFlags = (runFlags flgCfg) ++ ["-r", "200", "real"]}
+  }
 
 

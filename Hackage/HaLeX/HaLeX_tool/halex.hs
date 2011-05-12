@@ -37,6 +37,8 @@ import Language.HaLex.Parser
 
 import Language.HaLex.Dfa2MDfa
 
+import Fibon.Run.BenchmarkHelper
+
 options     :: [OptDescr String]
 options     =  [ Option ['N','n']
                  ["NDFA"]
@@ -78,7 +80,10 @@ options     =  [ Option ['N','n']
 
 
 main :: IO ()
-main =
+main = fibonReplicateMain oldmain
+
+oldmain :: IO ()
+oldmain =
   do args <- getArgs
      let (o,n,errs) = getOpt Permute options args
      let (re,opts')  = partition ((=='r') . head) o

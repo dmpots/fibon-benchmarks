@@ -1,4 +1,3 @@
-import Dfa
 dfa = Dfa v q s z delta
   where 
 	 v = "+-.0123456789"
@@ -84,5 +83,4 @@ dfa = Dfa v q s z delta
 	 delta 6 '7' = 6
 	 delta 6 '8' = 6
 	 delta 6 '9' = 6
-
 

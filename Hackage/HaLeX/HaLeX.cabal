@@ -36,10 +36,9 @@ Library
                                 Language.HaLex.FaOperations, Language.HaLex.Util, Language.HaLex.Equivalence
 
 Executable HaLex
-           executable:          halex
            main-is:             halex.hs
-           hs-source-dirs:      HaLeX_tool, HaLeX_lib
-           build-depends:       base >3 && <= 5
+           hs-source-dirs:      HaLeX_tool, HaLeX_lib, ../../../../../tools/fibon-run
+           build-depends:       base >3 && <= 5, deepseq
 
            ghc-options:         
            ghc-prof-options:    -prof -auto-all
