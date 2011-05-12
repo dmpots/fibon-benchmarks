@@ -47,5 +47,6 @@ Library
 
 executable Fgl
   main-is: Main.hs
-  build-depends:	base < 5, mtl, containers, array, bytestring
+  hs-source-dirs: . ../../../../../tools/fibon-run
+  build-depends:	base < 5, mtl, containers, array, bytestring, deepseq
   extensions: MultiParamTypeClasses, OverlappingInstances, FlexibleInstances, ScopedTypeVariables

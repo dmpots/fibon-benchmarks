@@ -17,20 +17,7 @@ sharedConfig = BenchmarkInstance {
     , exeName        = "Fgl"
   }
 flgCfg = flagConfig sharedConfig
-
-mkInstance Test = sharedConfig {
-        flagConfig = flgCfg {
-          runFlags = [
-            "anna.col",
-            "david.col",
-            "homer.col",
-            "huck.col"
-          ]
-        }
-    }
-mkInstance Ref  = sharedConfig {
-        flagConfig = flgCfg {
-          runFlags = [
+trainGraphs = [
             "le450_15a.col",
             "le450_15b.col",
             "le450_15c.col",
@@ -44,6 +31,25 @@ mkInstance Ref  = sharedConfig {
             "le450_5c.col",
             "le450_5d.col"
           ]
+
+mkInstance Test = sharedConfig {
+        flagConfig = flgCfg {
+          runFlags = [
+            "anna.col",
+            "david.col",
+            "homer.col",
+            "huck.col"
+          ]
+        }
+    }
+mkInstance Train = sharedConfig {
+        flagConfig = flgCfg {
+          runFlags = trainGraphs
+        }
+    }
+mkInstance Ref  = sharedConfig {
+        flagConfig = flgCfg {
+          runFlags = ["-r", "30"] ++ trainGraphs
         }
     }
 

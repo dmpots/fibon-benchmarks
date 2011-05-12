@@ -9,20 +9,27 @@ import qualified Data.IntSet as Set
 import System.Environment
 import qualified Data.ByteString.Char8 as B
 
-main = do
-  fs <- getArgs
-  mapM_ doAlgs fs
+import Fibon.Run.BenchmarkHelper
+import Control.Monad(when)
 
-doAlgs :: FilePath -> IO ()
-doAlgs f = do
+main = fibonMain oldmain
+
+oldmain 0 = return ()
+oldmain n = do
+  fs <- getArgs
+  mapM_ (doAlgs (n == 1)) fs
+  oldmain (n-1)
+
+doAlgs :: Bool -> FilePath -> IO ()
+doAlgs fibonShow f = do
   mbG <- readDimacsGraph f
   case mbG of
     Just (nodes,edges) -> do
       let g = mkUGraph nodes edges :: UGr
-      putStrLn f
+      when fibonShow (putStrLn f)
       let g' = bcc g
       let ts = concatMap topsort g'
-      g' `seq` ts `seq` putStrLn (show ts)
+      g' `seq` ts `seq` when fibonShow $ putStrLn (show ts)
     Nothing -> putStrLn $ "Graph parse failed for file: "++f
 
 printG :: UGr -> IO ()
