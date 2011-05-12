@@ -18,15 +18,22 @@ import System.Environment (getArgs)
 import FST.Arguments
 import FST.Info
 
-main :: IO()
-main = do args <- getArgs
+import Fibon.Run.BenchmarkHelper
+
+main = fibonMain oldmain
+
+oldmain :: Int -> IO()
+oldmain 0 = return ()
+oldmain n = do 
+          args <- getArgs
           case args of
            []  -> do fstStudio
                      run emptyInfo
-           as -> batchMode as
+           as -> do batchMode (n == 1) as
+                    oldmain (n-1)
 
-batchMode :: [String] -> IO ()
-batchMode cmdopt = case parseBatch cmdopt of
+batchMode :: Bool -> [String] -> IO ()
+batchMode fibonShow cmdopt = case parseBatch cmdopt of
                     Left  err        -> putStrLn err
                     Right (file,cmd)
                      | isFST file -> do res <- open file
@@ -43,7 +50,7 @@ batchMode cmdopt = case parseBatch cmdopt of
                                                                                                                       case res of
                                                                                                                        Left err -> putStrLn err
                                                                                                                        _        -> return ()
-                                                                                                         _      -> putStrLn $ upB tr str
+                                                                                                         _      -> putStr $ (upBFibon fibonShow) tr str
                                                                                            Left  err -> putStrLn err
                                                                           Nothing   -> do interact (upB tr)
 					                | otherwise -> let tr = compile reg [] in
@@ -86,6 +93,18 @@ batchMode cmdopt = case parseBatch cmdopt of
                                                           Nothing   -> do interact (downB tr)
                                          Left err -> putStrLn err
                      | otherwise  -> putStrLn "Input file must end with *.fst or *.net"
+
+upBFibon :: Bool -> Transducer String -> String -> String
+upBFibon fibonShow transducer str = case (applyUp transducer (words str)) of
+                      -- Added by dmp 12 May 2010
+                      -- Print out only the last solution to avoid
+                      -- many MB of output
+                      Just xs -> 
+                        if fibonShow then (last $ map unwords xs) ++ "\n"
+                                     else deepseq output ""
+                          where output = (last $ map unwords xs) ++ "\n"
+                      --Just xs -> unlines $ map unwords xs
+                      Nothing -> []
 
 upB :: Transducer String -> String -> String
 upB transducer str = case (applyUp transducer (words str)) of

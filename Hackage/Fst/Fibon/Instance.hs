@@ -9,9 +9,9 @@ sharedConfig = BenchmarkInstance {
     flagConfig = FlagConfig {
         configureFlags = []
       , buildFlags     = []
-      , runFlags       = ["-u", "soda.fst"]
+      , runFlags       = ["-u", "soda.fst", "-i", "PLONK"]
       }
-    , stdinInput     = Just "PLONK"
+    , stdinInput     = Nothing
     , output         = [(Stdout, Diff "fst.stdout.expected")]
     , expectedExit   = ExitSuccess
     , exeName        = "Fst"
@@ -21,7 +21,10 @@ flgCfg = flagConfig sharedConfig
 mkInstance Test = sharedConfig {
         flagConfig = flgCfg
     }
-mkInstance Ref  = sharedConfig {
+mkInstance Train = sharedConfig {
         flagConfig = flgCfg
+    }
+mkInstance Ref  = sharedConfig {
+        flagConfig = flgCfg {runFlags = ["-r", "120"] ++ runFlags flgCfg}
     }
 
