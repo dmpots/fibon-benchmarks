@@ -121,7 +121,7 @@ flag small_base
   description: Choose the new smaller, split-up base package.
 
 executable Happy
-  hs-source-dirs: src
+  hs-source-dirs: src  ../../../../../tools/fibon-run
   main-is: Main.lhs
 
   if flag(small_base)
@@ -129,7 +129,7 @@ executable Happy
   else
     build-depends: base >= 1.0 && < 2.1
 
-  build-depends: base < 5, mtl >= 1.0
+  build-depends: base < 5, mtl >= 1.0, deepseq
   build-tools: perl
 
   extensions: CPP, MagicHash
