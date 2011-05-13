@@ -24,6 +24,9 @@ flgCfg = flagConfig sharedConfig
 mkInstance Test = sharedConfig {
         flagConfig = flgCfg
     }
+mkInstance Train = sharedConfig {
+        flagConfig = flgCfg
+    }
 mkInstance Ref  = sharedConfig {
         flagConfig = flgCfg
     }

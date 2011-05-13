@@ -6,16 +6,16 @@
 ------------------------------------------------------}
 
 parameters
-  time         = 900.0
-  outputBuffer = 500000
-  outputFreq   = 500000
+  time         = 15.0
+  outputBuffer = 50000
+  outputFreq   = 50000
   systemVol    = nil  -- interpret rates as propensities
 end
 
 molecules
-  x = 50000
-  y = 100000
-  z = 200000
+  x = 500
+  y = 1000
+  z = 2000  
 end
 
 reactions
