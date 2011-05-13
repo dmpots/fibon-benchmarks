@@ -20,25 +20,38 @@ import System.IO
 import Foreign
 import Foreign.Marshal.Array
 
-main = do
+import Fibon.Run.BenchmarkHelper
+
+main = fibonMain topmain
+
+topmain 1 = loopmain stdout 1
+topmain n = do
+  h <- openFile "_output" WriteMode
+  loopmain h n
+  hClose h
+  
+loopmain _h 1 = realmain stdout
+loopmain  h n = realmain h >> hSetFileSize h 0 >> loopmain h (n-1)
+
+realmain h = do
     w <- getArgs >>= return . read . head
     let n      = w `div` 8
         m  = 2 / fromIntegral w
-    putStrLn ("P4\n"++show w++" "++show w)
+    hPutStrLn h ("P4\n"++show w++" "++show w)
     p <- mallocArray0 n
-    unfold n (next_x w m n) p (T 1 0 0 (-1))
+    unfold h n (next_x w m n) p (T 1 0 0 (-1))
 
-unfold :: Int -> (T -> Maybe (Word8,T)) -> Ptr Word8 -> T -> IO ()
-unfold i f ptr x0 | i `seq` ptr `seq` x0 `seq` False = undefined
-unfold i f ptr x0 = loop x0
+unfold :: Handle -> Int -> (T -> Maybe (Word8,T)) -> Ptr Word8 -> T -> IO ()
+unfold h i f ptr x0 | i `seq` ptr `seq` x0 `seq` False = undefined
+unfold h i f ptr x0 = loop x0
   where
     loop x = x `seq` go ptr 0 x
 
     go p n x | p `seq` n `seq` x `seq` False = undefined
     go p n x = case f x of
         Just (w,y) | n /= i -> poke p w >> go (p `plusPtr` 1) (n+1) y
-        Nothing             -> hPutBuf stdout ptr i
-        _                   -> hPutBuf stdout ptr i >> loop x
+        Nothing             -> hPutBuf h ptr i
+        _                   -> hPutBuf h ptr i >> loop x
 {-# NOINLINE unfold #-}
 
 data T = T !Int !Int !Int !Double
