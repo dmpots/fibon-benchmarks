@@ -11,8 +11,15 @@ import Data.Set.TernarySet
 import System.IO
 import System.Environment
 
-main = do
-    (file:_) <- getArgs -- get file name
+import Fibon.Run.BenchmarkHelper
+import Control.Monad
+
+main = fibonMain oldmain
+
+oldmain :: Int -> IO ()
+oldmain 0 = return ()
+oldmain n = do
+    (file:queries:_) <- getArgs -- get file name
     contents <- readFile file -- read the file contents
     -- input <- getContents
     let wds = words contents -- separate the words
@@ -20,31 +27,35 @@ main = do
         newname = (file ++ ".bin")
     -- print . treeSize $ tree
     
-    putStr "All input words are in dictionary: "
-    print . all (`member` tree) $ wds -- make sure all words are actually in the tree
+    when (n == 1) $ putStr "All input words are in dictionary: "
+    fibonOutput . all (`member` tree) $ wds -- make sure all words are actually in the tree
     
-    putStr "Same number of words as input: "
-    print (size tree == length wds) -- make sure the same number of words are in the tree
+    when (n == 1) $ putStr "Same number of words as input: "
+    fibonOutput (size tree == length wds) -- make sure the same number of words are in the tree
     
-    putStr ("Writing " ++ newname ++ "... ")
+    when (n == 1) $ putStr ("Writing " ++ newname ++ "... ")
     encodeFile newname tree -- write the tree to a file as "filename.bin"
     
-    putStr "done.\nReading data back in... "
+    when (n == 1) $ putStr "done.\nReading data back in... "
     ntree <- decodeFile newname -- read in the file and decode it
     
-    putStr "done.\nRead in data matches original: "
-    print (tree == ntree) -- check the read in tree is the same as the one we wrote
+    when (n == 1) $ putStr "done.\nRead in data matches original: "
+    fibonOutput (tree == ntree) -- check the read in tree is the same as the one we wrote
         -- 
     -- Comment out these lines for benchmarking.
-    putStrLn "\n-- Enter a word to see if it is in the dictionary (^C to exit):"
-    interact' ((++ "\n> ") . ("-- " ++) . show . (`member` tree)) -- enter a word to see if it's in the tree
-    
-interact' :: (String -> String) -> IO ()
-interact' f = do
-    eof <- isEOF
+    when (n == 1) $ putStrLn "\n-- Enter a word to see if it is in the dictionary (^C to exit):"
+    withFile queries ReadMode (hInteract fibonOutput (`member` tree))
+    oldmain (n-1)
+    where
+      fibonOutput :: (Show a, NFData a) => a -> IO ()
+      fibonOutput a = if n == 1 then putStrLn (show a) else deepseq a (return ())
+
+hInteract :: (Bool -> IO ()) -> (String -> Bool) -> Handle  -> IO ()
+hInteract fibonOutput f h = do
+    eof <- hIsEOF h
     if eof
       then return ()
       else do
-        line <- getLine
-        putStrLn (f line)
-        interact' f
+        line <- hGetLine h
+        mapM_  (fibonOutput . f) (words line)
+        hInteract fibonOutput f h

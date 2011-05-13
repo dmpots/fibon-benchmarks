@@ -11,7 +11,7 @@ sharedConfig = BenchmarkInstance {
       , buildFlags     = []
       , runFlags       = []
       }
-    , stdinInput     = Just "words"
+    , stdinInput     = Nothing
     , output         = [(Stdout, Diff "tdict.stdout.expected")]
     , expectedExit   = ExitSuccess
     , exeName        = "TernaryTrees"
@@ -19,10 +19,13 @@ sharedConfig = BenchmarkInstance {
 flgCfg = flagConfig sharedConfig
 
 mkInstance Test = sharedConfig {
-        flagConfig = flgCfg {runFlags = ["theend.txt"]}
+        flagConfig = flgCfg {runFlags = ["words", "theend.txt"]}
+    }
+mkInstance Train = sharedConfig {
+        flagConfig = flgCfg {runFlags = ["words", "olivertwist.txt"]}
     }
 mkInstance Ref  = sharedConfig {
-        flagConfig = flgCfg {runFlags = ["olivertwist.txt"]}
+        flagConfig = flgCfg {runFlags = ["-r", "300", "words", "olivertwist.txt"]}
     }
 
 
