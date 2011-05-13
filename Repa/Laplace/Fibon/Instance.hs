@@ -21,7 +21,10 @@ flgCfg = flagConfig sharedConfig
 mkInstance Test = sharedConfig {
         flagConfig = flgCfg {runFlags = words "10 pls-100x100.bmp laplace.bmp"}
     }
-mkInstance Ref  = sharedConfig {
+mkInstance Train = sharedConfig {
         flagConfig = flgCfg {runFlags = words "1000 pls-400x400.bmp laplace.bmp"}
+    }
+mkInstance Ref  = sharedConfig {
+        flagConfig = flgCfg {runFlags = words "-r 30 1000 pls-400x400.bmp laplace.bmp"}
     }
 

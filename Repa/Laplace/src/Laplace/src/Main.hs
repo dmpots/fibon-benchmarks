@@ -13,8 +13,12 @@ import System.Environment
 import Data.Word
 import Control.Monad
 
-main :: IO ()
-main 
+import Fibon.Run.BenchmarkHelper
+
+main = fibonReplicateMain oldmain
+
+oldmain :: IO ()
+oldmain 
  = do	args	<- getArgs
 	case args of
 	  [steps, fileInput, fileOutput]	
@@ -78,7 +82,7 @@ laplace steps fileInput fileOutput
 		    in	arrFinal `deepSeqArray` return arrFinal
 
 	-- Print how long it took
-	putStr (prettyTime t)
+	--putStr (prettyTime t)
 
 	-- Make the result image
 	let arrImageOut		

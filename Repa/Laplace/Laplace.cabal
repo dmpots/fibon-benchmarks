@@ -30,8 +30,9 @@ Executable Laplace
         mtl,
         extensible-exceptions,
         -- for repa
-        dph-prim-seq
-
+        dph-prim-seq,
+        -- for fibon
+        deepseq
 
   Main-is: src/Laplace/src/Main.hs
   hs-source-dirs: . 
@@ -42,5 +43,6 @@ Executable Laplace
                   ../_RepaLib/repa-bytestring 
                   ../_RepaLib/quickcheck 
                   src/Laplace/src
+                  ../../../../../tools/fibon-run
 
 
