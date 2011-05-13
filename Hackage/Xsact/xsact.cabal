@@ -25,9 +25,9 @@ Tested-With:    GHC==6.8.2
 
 Executable     Xsact
                Main-Is:        Xsact.lhs
-               Hs-Source-Dirs: src
-               Build-Depends:  base >3 && <5, containers, random, array, unix, directory, process
-               Ghc-Options:    -Wall -funbox-strict-fields
+               Hs-Source-Dirs: src ../../../../../tools/fibon-run
+               Build-Depends:  base >3 && <5, containers, random, array, unix, directory, process, deepseq
+               Ghc-Options:    -funbox-strict-fields
 
 Executable     xplit
                Buildable:      False

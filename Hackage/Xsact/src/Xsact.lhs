@@ -40,6 +40,7 @@ import Data.List   (isPrefixOf)
 import System.Environment (getArgs)
 import System.Console.GetOpt
 import System.IO     (hPutStrLn,stderr) -- for usage
+import Fibon.Run.BenchmarkHelper
 
 type ParseF = Fasta.FHParser
 
@@ -51,14 +52,22 @@ The {\tt main} function is just a simple wrapper.
 
 \begin{code}
 
-main :: IO ()
-main = do
+fakeWriter :: String -> IO ()
+fakeWriter s = deepseq s (return ())
+
+main = fibonMain oldmain
+
+oldmain :: Int -> IO ()
+oldmain 0 = return ()
+oldmain n = do
     -- read k, n and file names from args
     args <- getArgs
     let (opt,non,err) = getOpt Permute options args
     if err == [] && length non == 1 && validate opt
-        then main_real1 (parseOpts opt) (head non)
+        then main_real1 ((parseOpts opt) {writer = fibonWriter}) (head non) >> oldmain (n-1)
         else usage err
+    where
+    fibonWriter = if n == 1 then putStr else fakeWriter
 
 \end{code}
 \newpage
