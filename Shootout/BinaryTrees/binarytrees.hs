@@ -7,33 +7,42 @@
 
 import System.Environment
 
+import Fibon.Run.BenchmarkHelper
+
 data Tree = Nil | Node !Int Tree Tree
 
 minN :: Int
 minN = 4
 
-io s n t = putStrLn $ s ++ " of depth "++show n++ "\t check: " ++ show t
+io i s n t = 
+  if i == 1 then
+    putStrLn $ s ++ " of depth "++show n++ "\t check: " ++ show t
+  else
+    s `deepseq` n `deepseq` t `deepseq` return ()
 
-main = do
+main = fibonMain oldmain
+
+oldmain 0 = return ()
+oldmain cnt = do
     n <- fmap (read . head) getArgs
     let maxN     = max (minN + 2) n
         stretchN = maxN + 1
 
     -- stretch memory tree
     let c = check (make 0 stretchN)
-    io "stretch tree" stretchN c
+    io cnt "stretch tree" stretchN c
 
     -- allocate a long lived tree
     let long    = make 0 maxN
 
     -- allocate, walk, and deallocate many bottom-up binary trees
     let vs = depth minN maxN
-    mapM_ (\((m,d,i)) -> io (show m ++ "\t trees") d i) vs
+    mapM_ (\((m,d,i)) -> io cnt (show m ++ "\t trees") d i) vs
 
     -- confirm the the long-lived binary tree still exists
-    io "long lived tree" maxN (check long)
+    io cnt "long lived tree" maxN (check long)
 
-    return ()
+    oldmain (cnt-1)
 
 -- generate many trees
 depth :: Int -> Int -> [(Int,Int,Int)]
