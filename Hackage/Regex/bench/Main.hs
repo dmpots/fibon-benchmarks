@@ -14,12 +14,12 @@ import Text.Regex.PDeriv.ByteString.TwoPasses    as TP
 
 main = do
   (cnt, files) <- parseArgs
-  forM_ [1..cnt] $ \_ -> do
-    mapM_ (process e1) files
-    mapM_ (process e2) files
-    mapM_ (process e3) files
-    mapM_ (process e4) files
-    mapM_ (process e5) files
+  forM_ [cnt,cnt-1 .. 1] $ \n -> do
+    mapM_ (process n e1) files
+    mapM_ (process n e2) files
+    mapM_ (process n e3) files
+    mapM_ (process n e4) files
+    mapM_ (process n e5) files
   where
     e1 = (LR.compile, LR.defaultCompOpt, LR.defaultExecOpt, LR.regexec)
     e2 = (LD.compile, LD.defaultCompOpt, LD.defaultExecOpt, LD.regexec) 
@@ -36,9 +36,10 @@ mkEngine (c, cOpt, eOpt, exe) =
   
 pattern = B.pack "^(.*) ([A-Za-z]{2}) ([0-9]{5})(-[0-9]{4})?$"
 
-process engine f = do
+process n engine f = do
   fLines <- B.lines `liftM` B.readFile f
-  putStrLn $ show (count 0 fLines)
+  let total = (count 0 fLines)
+  if n == 1 then putStrLn (show total) else total `seq` return ()
   where
     (match, regex)  = mkEngine engine 
     count !n []     = n

@@ -21,7 +21,10 @@ flgCfg = flagConfig sharedConfig
 mkInstance Test = sharedConfig {
         flagConfig = flgCfg {runFlags = ["1", "addr.txt"]}
     }
-mkInstance Ref  = sharedConfig {
+mkInstance Train = sharedConfig {
         flagConfig = flgCfg {runFlags = ["10", "addr.txt"]}
+    }
+mkInstance Ref  = sharedConfig {
+        flagConfig = flgCfg {runFlags = ["510", "addr.txt"]}
     }
 
