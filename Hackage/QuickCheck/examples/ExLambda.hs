@@ -128,7 +128,8 @@ rename x y a | x == y    = a
 
 showResult :: (Show a, Testable prop) => a -> (a -> prop) -> Property
 showResult x f =
-  whenFail (putStrLn ("Result: " ++ show x)) $
+  --whenFail (putStrLn ("Result: " ++ show x)) $
+  whenFail (return ()) $
     f x
 
 prop_SubstFreeNoVarCapture a x b =

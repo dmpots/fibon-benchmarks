@@ -63,8 +63,8 @@ library
 
 executable Qc
   main-is:        Main.hs
-  hs-source-dirs: examples, .
-  build-depends:	base > 3 && < 5, random, containers, mtl
+  hs-source-dirs: examples . ../../../../../tools/fibon-run
+  build-depends:	base > 3 && < 5, random, containers, mtl, deepseq
   if impl(ghc >= 6.7) && impl(ghc < 6.13)
       Build-depends: ghc
   if impl(ghc >= 6.9)

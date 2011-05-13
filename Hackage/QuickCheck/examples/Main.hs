@@ -14,7 +14,12 @@ import System.Environment
 import System.Random
 import Test.QuickCheck.Test
 
-main = do
+import Fibon.Run.BenchmarkHelper
+
+main = fibonMain oldmain
+
+oldmain 0 = return ()
+oldmain n = do
   cnt <- parseArgs
   let   
       stdgen = mkStdGen 42
@@ -29,6 +34,8 @@ main = do
           , ExMerge.run
         ] 
     $ \t -> t args
+  when (n == 1) $ putStrLn "Ok"
+  oldmain (n-1)
 
 parseArgs = do {
   args <- getArgs
