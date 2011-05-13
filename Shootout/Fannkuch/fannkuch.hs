@@ -5,6 +5,8 @@
 import System.Environment
 import Data.List    (foldl')
 
+import Fibon.Run.BenchmarkHelper
+
 rotate n (x:xs) = a ++ x : b
     where (a,b) = splitAt (n-1) xs
 
@@ -20,8 +22,13 @@ rev (x:xs) = reverse a ++ x : b
 fannuch :: [[Int]] -> Int
 fannuch xs = foldl' max 0 $ map flop xs
 
-main = do
+oldmain 0 = return ()
+oldmain cnt = do
     [n] <- getArgs
     let xs = perms [1..read n::Int]
-    putStr $ unlines $ map (concatMap show) $ take 30 xs
-    putStrLn $ "Pfannkuchen(" ++ n ++ ") = " ++ show (fannuch xs)
+    fibonOutput $ unlines $ map (concatMap show) $ take 30 xs
+    fibonOutput $ "Pfannkuchen(" ++ n ++ ") = " ++ show (fannuch xs) ++ "\n"
+    oldmain (cnt-1)
+    where fibonOutput s = if cnt == 1 then putStr s else deepseq s (return ())
+
+main = fibonMain oldmain
