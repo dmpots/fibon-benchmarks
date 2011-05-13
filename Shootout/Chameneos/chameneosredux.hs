@@ -18,6 +18,8 @@ import System.IO
 import GHC.Conc
 import Foreign hiding (complement)
 
+import Fibon.Run.BenchmarkHelper
+
 newtype Color = C Int deriving (Storable,Enum)
 
 #define Y (C 2)
@@ -70,27 +72,33 @@ showN = unwords . map ((digits !!) . digitToInt) . show
 
 digits = words "zero one two three four five six seven eight nine"
 
-run :: Int -> Int -> [Color] -> IO (IO ())
-run n cpu cs = do
+run :: (String -> IO ()) -> Int -> Int -> [Color] -> IO (IO ())
+run fibonPutStr n cpu cs = do
     fs    <- replicateM (length cs) newEmptyMVar
     mpv   <- newMVar (Nobody n)
     withArrayLen cs $ \ n cols -> do
-    	zipWithM_ ((forkOnIO cpu .) . arrive mpv) fs (take n (iterate (`advancePtr` 1) cols))
+    	zipWithM_ ((forkOn cpu .) . arrive mpv) fs (take n (iterate (`advancePtr` 1) cols))
 
     	return $ do
-	  putStrLn . map toLower . unwords . ([]:) . map show $ cs
+	  fibonPutStr . map toLower . unwords . ([]:) . map show $ cs
 	  ns    <- mapM takeMVar fs
     -- dmp: commenting this out to reduce output variabilty
 	  --putStr . map toLower . unlines $ [unwords [show n, showN b] | (n, b) <- ns]
-	  putStrLn . (" "++) . showN . sum . map fst $ ns
-	  putStrLn ""
+	  fibonPutStr . (" "++) . showN . sum . map fst $ ns
+	  fibonPutStr ""
 
-main = do
-    putStrLn . map toLower . unlines $
+oldmain 0   = return ()
+oldmain cnt = do
+    fibonPutStr . map toLower . unlines $
         [unwords [show a, "+", show b, "->", show $ complement a b]
             | a <- [B..Y], b <- [B..Y]]
 
     n <- readIO . head =<< getArgs
-    actions <- zipWithM (run n) [0..] [[B..Y],[B,R,Y,R,Y,B,R,Y,R,B]]
+    actions <- zipWithM (run fibonPutStr n) [0..] [[B..Y],[B,R,Y,R,Y,B,R,Y,R,B]]
     sequence_ actions
+    oldmain (cnt-1)
+    where
+      fibonPutStr :: String -> IO ()
+      fibonPutStr = if cnt == 1 then putStrLn else flip deepseq (return ())
 
+main = fibonMain oldmain
