@@ -10,9 +10,12 @@ import Data.Array.Repa				as A
 import System.Environment
 import Control.Monad
 
+import Fibon.Run.BenchmarkHelper
 
-main :: IO ()
-main 
+main = fibonReplicateMain oldmain
+
+oldmain :: IO ()
+oldmain 
  = do	args	<- getArgs
 	case args of
 	 [cutoff, fileIn, fileOut]
@@ -47,7 +50,7 @@ mainWithArgs cutoff fileIn fileOut
 			 `deepSeqArray` arrBlue'
 			 `deepSeqArray` return (arrRed', arrGreen', arrBlue')
 	
-	putStr (prettyTime t)
+	--putStr (prettyTime t)
 	
 	-- Write it back to file.
 	writeComponentsToBMP fileOut
