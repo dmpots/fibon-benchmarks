@@ -17,16 +17,17 @@ sharedConfig = BenchmarkInstance {
     , exeName        = "Palindromes"
   }
 flgCfg = flagConfig sharedConfig
+trainFiles = ["annakarenina.txt",
+              "huckfinn.txt",
+              "olivertwist.txt",
+              "swannsway.txt" ]
 
 mkInstance Test = sharedConfig {
         flagConfig = flgCfg {runFlags = ["-s", "small"]}
     }
-
+mkInstance Train = sharedConfig {
+        flagConfig = flgCfg {runFlags = ["-s"] ++ trainFiles}
+    }
 mkInstance Ref  = sharedConfig {
-        flagConfig = flgCfg {runFlags = ["-s", 
-                                         "annakarenina.txt",
-                                         "huckfinn.txt",
-                                         "olivertwist.txt",
-                                         "swannsway.txt"
-                                         ]}
+        flagConfig = flgCfg {runFlags = ["-r", "120"] ++ ["-s"] ++ trainFiles}
     }

@@ -16,19 +16,24 @@ import System.Console.GetOpt
 
 import Data.Algorithms.Palindromes.Options
 
+import Fibon.Run.BenchmarkHelper
+
 -----------------------------------------------------------------------------
 -- main
 -----------------------------------------------------------------------------
 
-handleFilesWith :: (String -> String) -> [String] -> IO ()
-handleFilesWith f = 
+handleFilesWith :: Int -> (String -> String) -> [String] -> IO ()
+handleFilesWith iters f = 
   let hFW filenames = 
         case filenames of
           []        ->  putStr (f "")
-          (fn:fns)  ->  do input <- readFile fn
-                           putStrLn (f input)
-                           hFW fns
+          (fn:fns)  ->  do  input <- readFile fn
+                            let res = f input in do
+                            fibonOutput (putStrLn  res) res
+                            hFW fns
+      fibonOutput a b = if iters == 1 then a else deepseq b (return ())
   in hFW                                 
+
 
 handleStandardInputWith :: (String -> String) -> IO ()
 handleStandardInputWith function = 
@@ -36,13 +41,17 @@ handleStandardInputWith function =
      putStrLn (function input) 
 
 main :: IO ()
-main = do args <- getArgs
-          let (optionArgs,files,errors) = getOpt Permute options args
-          if not (null errors) 
-            then putStrLn (concat errors) 
-            else let (function,fromfile) = handleOptions optionArgs
-                 in  if fromfile 
-                     then handleFilesWith function files 
-                     else handleStandardInputWith function 
+main = fibonMain oldmain
+
+oldmain :: Int -> IO ()
+oldmain 0 = return ()
+oldmain n = do  args <- getArgs
+                let (optionArgs,files,errors) = getOpt Permute options args
+                if not (null errors) 
+                  then putStrLn (concat errors) 
+                  else let (function,fromfile) = handleOptions optionArgs
+                      in  if fromfile 
+                          then handleFilesWith n function files  >> oldmain (n-1)
+                          else handleStandardInputWith function  >> oldmain (n-1)
     
     
