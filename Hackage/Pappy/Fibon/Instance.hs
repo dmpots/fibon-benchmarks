@@ -17,15 +17,17 @@ sharedConfig = BenchmarkInstance {
     , exeName        = "Pappy"
   }
 flgCfg = flagConfig sharedConfig
+trainFiles = [ "Scar.java", "SPEED.java", "Blowfish.java", "CAST5.java",
+               "DES.java", "TestRijndael.java" ]
+
 
 mkInstance Test = sharedConfig {
         flagConfig = flgCfg {runFlags = ["HexDump.java"]}
     }
+mkInstance Train = sharedConfig {
+        flagConfig = flgCfg {runFlags = trainFiles}
+    }
 mkInstance Ref  = sharedConfig {
-        flagConfig = flgCfg {runFlags = [
-           "Scar.java", "SPEED.java", "Blowfish.java", "CAST5.java",
-           "DES.java", "TestRijndael.java"
-           ]
-        }
+        flagConfig = flgCfg {runFlags = ["-r", "250"] ++ trainFiles}
     }
 

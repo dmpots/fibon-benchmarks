@@ -8,6 +8,9 @@ import Parse
 
 import System.Environment
 
+import Fibon.Run.BenchmarkHelper
+import Control.Monad
+
 
 
 -------------------- Lexical Preprocessing --------------------
@@ -1034,13 +1037,16 @@ javaParseFile name =
 			Parsed cu _ _ -> return cu
 			NoParse e -> fail (show e)
 
-runParse :: FilePath -> IO ()
-runParse f = do
+runParse :: Bool -> FilePath -> IO ()
+runParse showOutput f = do
   (mbN, _, _) <- javaParseFile f
-  putStrLn $ show mbN
+  if showOutput then putStrLn $ show mbN else deepseq mbN (return ())
 
-main = do
+oldmain 0 = return ()
+oldmain n = do
   args <- getArgs
-  mapM_ runParse args
-  putStrLn "Ok"
+  mapM_ (runParse (n == 1)) args
+  when (n == 1) $ putStrLn "Ok"
+  oldmain (n-1)
 
+main = fibonMain oldmain

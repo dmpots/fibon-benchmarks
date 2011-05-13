@@ -65,8 +65,8 @@ Executable pappy
 
 Executable Pappy
      Main-is:        JavaMonad.hs
-     Hs-source-dirs: src, java-parser
-     Build-depends:  base >= 4 && < 5
+     Hs-source-dirs: src, java-parser, ../../../../../tools/fibon-run
+     Build-depends:  base >= 4 && < 5, deepseq
 
      if impl(ghc < 7.1)
         build-depends: haskell98
