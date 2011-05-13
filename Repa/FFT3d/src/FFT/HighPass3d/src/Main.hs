@@ -12,8 +12,12 @@ import System.Environment
 import Control.Monad
 import Prelude					as P
 
-main :: IO ()
-main 
+import Fibon.Run.BenchmarkHelper
+
+main = fibonReplicateMain oldmain
+
+oldmain :: IO ()
+oldmain 
  = do	args	<- getArgs
 	case args of
 	 [size, prefix]	-> mainWithArgs (read size) prefix
@@ -43,7 +47,7 @@ mainWithArgs size prefixOut
 	 	$  let arrFinal'	= transform arrInit center cutoff
 	  	   in  arrFinal' `deepSeqArray` return arrFinal'
 
-	putStr (prettyTime t)
+	--putStr (prettyTime t)
 
  	--mapM_ (dumpSlice prefixOut arrFinal) [0..size - 1]
  	dumpSlice prefixOut arrFinal 0
