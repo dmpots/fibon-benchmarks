@@ -17,9 +17,14 @@ import Text.Printf
 import Control.Monad
 import Data.ByteString.Internal (inlinePerformIO)
 
+import Fibon.Run.BenchmarkHelper
+
 type Reals = Ptr Double
 
-main = do
+main = fibonMain oldmain
+
+oldmain 0 = return ()
+oldmain cnt = do
     n <- getArgs >>= readIO . head
 
     u <- mallocArray n :: IO Reals
@@ -28,9 +33,9 @@ main = do
     mapM_ (\i -> pokeElemOff v i 0)[0..n-1] 
 
     powerMethod 10 n u v
-    printf "%.2f\n" (eigenvalue n u v 0 0 0)
+    when (cnt == 1) $ printf "%.2f\n" (eigenvalue n u v 0 0 0)
 
-    return ()
+    oldmain (cnt-1)
 
 ------------------------------------------------------------------------
 

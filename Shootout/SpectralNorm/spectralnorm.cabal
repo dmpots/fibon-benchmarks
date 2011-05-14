@@ -49,10 +49,12 @@ Cabal-version:       >=1.2
 Executable SpectralNorm
   -- .hs or .lhs file containing the Main module.
   Main-is:             spectralnorm.hs
+  hs-source-dirs:      . ../../../../../tools/fibon-run
   
   -- Packages needed in order to build this package.
   Build-depends:       base >= 4 && <5,
-                       bytestring
+                       bytestring,
+                       deepseq
   
   -- Modules not exported by this package.
   -- Other-modules:       
