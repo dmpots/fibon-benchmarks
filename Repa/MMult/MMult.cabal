@@ -30,7 +30,9 @@ Executable MMult
         mtl,
         extensible-exceptions,
         -- for repa
-        dph-prim-seq
+        dph-prim-seq,
+        -- for fibon
+        deepseq
 
 
   Main-is: src/MMult/src/Main.hs
@@ -41,5 +43,6 @@ Executable MMult
                   ../_RepaLib/bmp 
                   ../_RepaLib/repa-bytestring 
                   ../_RepaLib/quickcheck 
+                  ../../../../../tools/fibon-run
 
 

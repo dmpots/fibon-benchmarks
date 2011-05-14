@@ -10,6 +10,8 @@ import Control.Monad
 import System.Random
 import qualified "dph-prim-par" Data.Array.Parallel.Unlifted as U
 
+import Fibon.Run.BenchmarkHelper
+
 -- Arg Parsing ------------------------------------------------------------------------------------
 data Arg
 	= ArgSolver       String
@@ -93,12 +95,16 @@ genRandomUArray n
 
 			
 -- Main -------------------------------------------------------------------------------------------
-main :: IO ()
-main 
- = do	args	<- liftM parseArgs $ getArgs
-	main' args
+main = fibonMain oldmain
 
-main' args
+oldmain :: Int -> IO ()
+oldmain 0 = return ()
+oldmain n = do	
+  args	<- liftM parseArgs $ getArgs
+  main' n args
+  oldmain (n-1)
+
+main' n args
 	| [argMat1, argMat2]	<- filter isArgMatrix args
 	, mArgOut		<- listToMaybe [s | ArgOutFile s <- args]
 	= do	
@@ -121,7 +127,7 @@ main' args
 		--putStr (prettyTime t)
 
 		-- Print a checksum of all the elements
-		putStrLn $ "checkSum        = " ++ show (A.sumAll matResult)
+		when (n == 1) $ putStrLn $ "checkSum        = " ++ show (A.sumAll matResult)
 
 		-- Write the output to file if requested.
 		case mArgOut of 
