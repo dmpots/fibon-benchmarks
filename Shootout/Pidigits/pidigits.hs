@@ -6,17 +6,32 @@
 
 import System.Environment
 
+import Fibon.Run.BenchmarkHelper
+import Data.IORef
+
 data F = F !Integer !Integer !Integer !Integer
 
-main :: IO ()
-main = loop 10 0 . flip take (str (F 1 0 0 1) ns) . read . head =<< getArgs
+main = fibonMain topmain
 
-ns = [ F k (4*k+2) 0 (2*k+1) | k <- [1..] ]
+topmain n = do
+  nsr <- newIORef ([] :: [f])
+  newmain n nsr
 
-loop :: Int -> Integer -> [Integer] -> IO ()
-loop n s []     = putStrLn $ replicate n ' ' ++ "\t:" ++ show s
-loop 0 s xs     = putStrLn ("\t:"++show s) >> loop 10 s xs
-loop n s (x:xs) = putStr (show x)          >> loop (n-1) (s+1) xs
+newmain :: Int -> IORef [F] -> IO ()
+newmain 0 _ = return ()
+newmain cnt nsr = do
+  writeIORef nsr [ F k (4*k+2) 0 (2*k+1) | k <- [1..] ]
+  n  <- getArgs >>= return . read . head
+  ns <- readIORef nsr
+  loop fibonOut 10 0 (take n (str (F 1 0 0 1) ns))
+  writeIORef nsr []
+  newmain (cnt-1) nsr
+  where fibonOut s = if cnt == 1 then putStr s else deepseq s (return ())
+
+loop :: (String -> IO ()) -> Int -> Integer -> [Integer] -> IO ()
+loop out n s []     = out $ replicate n ' ' ++ "\t:" ++ show s ++ "\n"
+loop out 0 s xs     = out ("\t:"++show s ++ "\n") >> loop out 10 s xs
+loop out n s (x:xs) = out(show x)          >> loop out (n-1) (s+1) xs
 
 flr  x           (F q r s t) = (q*x + r) `div` (s*x + t)
 comp1 (F q r s t) (F u v w x) = F (q*u+r*w) (q*v+r*x) (t*w) (t*x)
