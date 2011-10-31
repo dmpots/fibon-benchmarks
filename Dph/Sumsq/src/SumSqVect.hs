@@ -3,7 +3,7 @@
 module SumSqVect (sumSq)
 where
 
-import Data.Array.Parallel.Prelude
+import Data.Array.Parallel
 import Data.Array.Parallel.Prelude.Int as I
 
 import qualified Prelude
