@@ -6,7 +6,6 @@ import Data.Array.Parallel.Prelude
 import qualified Data.Array.Parallel.Prelude.Double as D
 import Data.Array.Parallel.PArray as P
 import Data.Array.Parallel
-import Data.Array.Parallel.Prelude ( fromUArrPA_2' )
 
 import Prelude as Prel
 import qualified System.Random as R
@@ -73,7 +72,7 @@ loadPoints file
 convert :: U.Array Double -> U.Array Double -> IO (Point (PArray QH.Point))
 convert xs ys
   = do
-      let pts = QH.points (fromUArrPA' xs) (fromUArrPA' ys)
+      let pts = QH.points (P.fromUArray xs) (P.fromUArray ys)
       evaluate $ nf pts
       return $ ("N = " ++ show (U.length xs)) `mkPoint` pts
 

@@ -10,6 +10,6 @@ Executable Dotp
   Hs-Source-Dirs:      src ../_DphLib
   Build-depends:       base == 4.*,
                        dph-prim-par,
+                       dph-lifted-copy,
                        old-time,
-                       dph-par,
                        random
