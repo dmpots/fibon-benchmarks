@@ -151,7 +151,7 @@ delay 	:: (Shape sh, Elt a)
 delay arr
  = case arr of
 	Delayed  sh fn		-> (sh, fn)
-	Manifest sh uarr	-> (sh, \i -> uarr U.!: S.toIndex sh i)
+	Manifest sh uarr	-> (sh, \i -> U.index "" uarr $ S.toIndex sh i)
 
 
 -- | Convert an array to an unboxed `U.Array`, forcing it if required.
@@ -184,7 +184,7 @@ index, (!:)
 index arr ix
  = case arr of
 	Delayed  _  fn		-> fn ix
-	Manifest sh uarr	-> uarr U.!: (S.toIndex sh ix)
+	Manifest sh uarr	-> U.index "" uarr  (S.toIndex sh ix)
 
 {-# INLINE (!:) #-}
 (!:) arr ix = index arr ix
@@ -196,7 +196,7 @@ toScalar :: Elt a => Array Z a -> a
 toScalar arr
  = case arr of
 	Delayed  _ fn		-> fn Z
-	Manifest _ uarr		-> uarr U.!: 0
+	Manifest _ uarr		-> U.index "" uarr 0
 
 
 -- Basic Operations -------------------------------------------------------------------------------

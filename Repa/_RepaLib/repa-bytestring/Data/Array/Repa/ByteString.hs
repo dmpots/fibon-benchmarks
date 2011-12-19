@@ -33,7 +33,7 @@ toByteString arr
 	 = return ()
 
 	 | otherwise
-	 = do	pokeByteOff bufDest offset (uarr U.!: offset)
+	 = do	pokeByteOff bufDest offset (U.index "" uarr offset)
 		copy (offset + 1)
 
     in do

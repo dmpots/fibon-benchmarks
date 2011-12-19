@@ -90,7 +90,7 @@ genRandomUArray n
 	let rg		= mkStdGen seed
     	let ivec	=  U.randomRs k (-100, 100) rg :: U.Array Int
     	let randvec	= U.map (\i -> fromIntegral i) ivec
-	let vec		= U.map (\i -> (randvec U.!: (i `mod` k))) (U.enumFromTo 0 (n-1))
+	let vec		= U.map (\i -> ((U.index "") randvec (i `mod` k))) (U.enumFromTo 0 (n-1))
 	return vec
 
 			
