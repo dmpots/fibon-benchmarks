@@ -61,7 +61,7 @@ library
     Test.QuickCheck.Exception
   GHC-options:
 
-executable Qc
+executable QuickCheck
   main-is:        Main.hs
   hs-source-dirs: examples . ../../../../../tools/fibon-run
   build-depends:	base > 3 && < 5, random, containers, mtl, deepseq
