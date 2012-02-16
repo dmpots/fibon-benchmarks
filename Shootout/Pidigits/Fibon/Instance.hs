@@ -19,10 +19,10 @@ sharedConfig = BenchmarkInstance {
 flgCfg = flagConfig sharedConfig
 
 mkInstance Test = sharedConfig {
-        flagConfig = flgCfg {runFlags = ["1000"]}
+        flagConfig = flgCfg {runFlags = ["10"]}
     }
 mkInstance Train = sharedConfig {
-        flagConfig = flgCfg {runFlags = ["10000"]}
+        flagConfig = flgCfg {runFlags = ["350"]}
     }
 mkInstance Ref  = sharedConfig {
         flagConfig = flgCfg {runFlags = ["-r", "170", "10000"]}
